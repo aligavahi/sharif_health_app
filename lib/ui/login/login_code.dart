@@ -15,7 +15,7 @@ class LoginCode extends StatefulWidget {
 }
 
 class _LoginCodeState extends State<LoginCode> {
-  int retryTime = 12;
+  int retryTime = 120;
 
   final String title = "تایید شماره موبایل";
 
