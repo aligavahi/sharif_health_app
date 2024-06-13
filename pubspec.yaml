@@ -81,7 +81,7 @@ flutter:
   fonts:
     - family: Kalameh
       fonts:
-        - asset: assets/font/Kalameh-thin.ttf
+        - asset: assets/font/Kalameh-Thin.ttf
           weight: 100
         - asset: assets/font/Kalameh-Regular.ttf
           weight: 400
