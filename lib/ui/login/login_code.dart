@@ -1,16 +1,35 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pinput/pinput.dart';
 import 'package:sharif_health_app/model/login/login_cubit.dart';
 
-class LoginCode extends StatelessWidget {
-  const LoginCode({super.key});
+class LoginCode extends StatefulWidget {
+  const LoginCode({super.key, required this.phoneNumber});
+
+  final String phoneNumber;
+
+  @override
+  State<LoginCode> createState() => _LoginCodeState();
+}
+
+class _LoginCodeState extends State<LoginCode> {
+  int retryTime = 12;
 
   final String title = "تایید شماره موبایل";
+
   final String detail = "کد ارسالی به شماره {} را وارد کنید";
-  final String buttonTextOk1 = "ارسال";
-  final String buttonTextOk2 = "{} ثانیه تا ارسال مجدد";
+
+  final String buttonTextOk1 = "ارسال پیامک";
+
+  final String buttonTextOk2 = " {} " "ثانیه تا ارسال مجدد";
+
   final String buttonTextBack = "ویرایش شماره موبایل";
+
+  _LoginCodeState() {
+    startTimer();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +85,7 @@ class LoginCode extends StatelessWidget {
         SizedBox(
           height: 30,
           child: Text(
-            detail,
+            detail.replaceAll('{}', widget.phoneNumber),
             style: const TextStyle(color: Colors.white),
           ),
         ),
@@ -95,21 +114,26 @@ class LoginCode extends StatelessWidget {
                 borderRadius: BorderRadius.circular(0.0),
               ),
               padding: EdgeInsets.zero,
-              elevation: 4,
               backgroundColor: Colors.transparent,
             ),
-            onPressed: () {},
+            onPressed: (retryTime > 0)
+                ? null
+                : () {
+                    BlocProvider.of<LoginCubit>(context).sendSms();
+                  },
             child: Ink.image(
+              colorFilter: (retryTime > 0)
+                  ? const ColorFilter.mode(Colors.grey, BlendMode.darken)
+                  : null,
               image: const AssetImage('assets/5.png'),
               fit: BoxFit.cover,
-              child: SizedBox(
-                width: double.infinity,
-                height: double.infinity,
-                child: Center(
-                  child: Text(
-                      style: const TextStyle(color: Colors.white),
-                      buttonTextOk1),
-                ),
+              child: Center(
+                child: Text(
+                    textDirection: TextDirection.rtl,
+                    style: const TextStyle(color: Colors.white),
+                    (retryTime > 0)
+                        ? buttonTextOk2.replaceAll('{}', retryTime.toString())
+                        : buttonTextOk1),
               ),
             ),
           ),
@@ -118,7 +142,9 @@ class LoginCode extends StatelessWidget {
             height: 50,
             width: 200,
             child: TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  BlocProvider.of<LoginCubit>(context).goPhoneNumber();
+                },
                 child: Row(children: [
                   const Icon(Icons.arrow_back_ios),
                   Text(
@@ -128,5 +154,23 @@ class LoginCode extends StatelessWidget {
                 ])))
       ],
     );
+  }
+
+  void startTimer() {
+    Timer.periodic(const Duration(seconds: 1), (timer) {
+      if (!mounted) {
+        retryTime = 0;
+        timer.cancel();
+        return;
+      }
+      if (retryTime > 0) {
+        setState(() {
+          retryTime -= 1;
+        });
+      }
+      if (retryTime <= 0 && timer.isActive) {
+        timer.cancel();
+      }
+    });
   }
 }
