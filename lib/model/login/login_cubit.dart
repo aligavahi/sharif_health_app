@@ -1,14 +1,20 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:sharif_health_app/provider/network.dart';
+import 'package:sharif_health_app/provider/storage.dart';
 
 part 'login_state.dart';
 
 class LoginCubit extends Cubit<LoginState> {
-  LoginCubit() : super(const LoginFirstPage("", ""));
+  LoginCubit() : super(const LoginFirstPage("", "")) {
+    Storage.loadStorage().whenComplete(() {
+      if (Storage.getToken().isNotEmpty) {
+        emit(const LoginSuccess("", ""));
+      }
+    });
+  }
 
-
-  updatePhoneNumber(phoneNumber){
+  updatePhoneNumber(phoneNumber) {
     emit(LoginInitial(phoneNumber, ''));
   }
 
@@ -25,15 +31,15 @@ class LoginCubit extends Cubit<LoginState> {
     String token =
         await NetworkProvider.signup(state.phoneNumber, state.secret, code);
 
-    if (token.isNotEmpty){
+    if (token.isNotEmpty) {
+      Storage.saveToken(token);
       emit(LoginSuccess(state.phoneNumber, state.secret));
-    }
-    else {
+    } else {
       emit(LoginFailedCode(state.phoneNumber, state.secret));
     }
   }
 
-  goPhoneNumber(){
+  goPhoneNumber() {
     emit(const LoginInitial("", ""));
   }
 }

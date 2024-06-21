@@ -143,7 +143,7 @@ class _LoginCodeState extends State<LoginCode> {
             width: 200,
             child: TextButton(
                 onPressed: () {
-                  BlocProvider.of<LoginCubit>(context).goPhoneNumber();
+                    BlocProvider.of<LoginCubit>(context).goPhoneNumber();
                 },
                 child: Row(children: [
                   const Icon(Icons.arrow_back_ios),

@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sharif_health_app/model/homepage/homepage_cubit.dart';
+import 'package:sharif_health_app/ui/homepage/my_tests/my_tests_page.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+  const HomePage({super.key, required this.index});
 
-  final int index = 0;
+  final int index;
 
   @override
   Widget build(BuildContext context) {
@@ -12,16 +15,14 @@ class HomePage extends StatelessWidget {
     const unselectedColor = Colors.red;
 
     return Scaffold(
-      body: Center(
-        child: Text("coming soon"),
-      ),
+      body: getBody(),
       bottomNavigationBar: BottomNavigationBar(
         unselectedItemColor: unselectedColor,
         selectedItemColor: selectedColor,
-        items: <BottomNavigationBarItem>[
+        items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             backgroundColor: backgroundColor,
-            icon: const ImageIcon(AssetImage("assets/navigation/profile.png")),
+            icon: ImageIcon(AssetImage("assets/navigation/profile.png")),
             label: 'پروفایل',
           ),
           BottomNavigationBarItem(
@@ -41,8 +42,26 @@ class HomePage extends StatelessWidget {
           )
         ],
         currentIndex: index,
-        onTap: (index) {},
+        onTap: (index) {
+          BlocProvider.of<HomepageCubit>(context).changePage(index);
+        },
       ),
+    );
+  }
+
+  getBody() {
+    switch (index) {
+      case 0:
+        break;
+      case 1:
+        break;
+      case 2:
+        return const MyTestsPage();
+      case 3:
+        break;
+    }
+    return const Center(
+      child: Text("coming soon"),
     );
   }
 }

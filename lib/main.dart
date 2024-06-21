@@ -52,12 +52,13 @@ class MyApp extends StatelessWidget {
   Widget homePage() {
     return Scaffold(
         body: BlocProvider<HomepageCubit>(
-      create: (BuildContext context) => HomepageCubit(),
-      child: BlocConsumer<HomepageCubit, HomepageState>(
-          listener: (context, state) {},
-          builder: (context, state) {
-            if (state is HomepageInitial) return HomePage();
-            return HomePage();
+        create: (BuildContext context) => HomepageCubit(),
+          child: BlocConsumer<HomepageCubit, HomepageState>(
+            listener: (context, state) {},
+            builder: (context, state) {
+            if (state is HomepageInitial)
+                    return HomePage(index: state.pageNumber);
+            return HomePage(index: state.pageNumber);
           }),
     ));
   }
