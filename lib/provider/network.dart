@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:sharif_health_app/provider/storage.dart';
 
 class NetworkProvider {
-  static String namespace= 'api';
+  static String namespace = 'api';
   static String host = "ezcar.ir";
   static int port = 80;
   static String urlSignup = 'signup';
@@ -17,7 +17,7 @@ class NetworkProvider {
   static Future<http.Response> request(String path, Map<String, dynamic> data,
       {Map<String, String> headers = const {}}) async {
     print(json.encode(data));
-    final reqHeaders=<String, String>{
+    final reqHeaders = <String, String>{
       "Access-Control-Allow-Origin": "*",
       'Content-Type': 'application/json',
     };
@@ -28,8 +28,6 @@ class NetworkProvider {
       headers: reqHeaders,
       body: json.encode(data),
     );
-    print("sdsdsdsd");
-    print(response.body);
     return response;
   }
 
@@ -97,7 +95,11 @@ class NetworkProvider {
     Map data = await getData(urlGetDeviceData, {},
         headers: {'AUTHORIZATION': "Bearer ${Storage.getToken()}"});
     if (data.isNotEmpty) {
-      return data['data'];
+      List<dynamic> dataList = data['data'];
+
+      List<Map> result = [];
+      dataList.forEach((val) => result.add(val));
+      return result;
     } else {
       return [];
     }

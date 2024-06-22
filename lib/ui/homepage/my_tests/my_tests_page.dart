@@ -28,6 +28,7 @@ class MyTestsPage extends StatelessWidget {
           builder: (context, state) {
             Widget inner;
             if (state is MyTestsDataReady) {
+
               if (state.tests.isNotEmpty) {
                 inner = getTestsPage(state.tests);
               } else {
@@ -98,7 +99,7 @@ class MyTestsPage extends StatelessWidget {
                       const Spacer(
                         flex: 2,
                       ),
-                      Text(tests[index].device_model, style: style),
+                      Text(tests[index].center, style: style),
                       const Spacer(
                         flex: 2,
                       ),
