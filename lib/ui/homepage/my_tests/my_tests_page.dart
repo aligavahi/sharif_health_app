@@ -92,18 +92,19 @@ class MyTestsPage extends StatelessWidget {
             children: List<InkWell>.generate(
                 tests.length,
                 (index) => InkWell(
+                  highlightColor: Colors.green,
                     onTap: () {},
                     child: Row(children: [
                       const Spacer(),
-                      Text(tests[index].date, style: style),
+                      Text(tests[index].getHijriFormatDate()),
                       const Spacer(
                         flex: 2,
                       ),
-                      Text(tests[index].center, style: style),
+                      Text(tests[index].center),
                       const Spacer(
                         flex: 2,
                       ),
-                      Text(index.toString(), style: style),
+                      Text(index.toString()),
                       const Spacer(),
                     ])))));
   }

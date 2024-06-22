@@ -55,7 +55,7 @@ class DeviceData {
 
   final double total_water_percentage;
 
-  final double total_Water_weight;
+  final double total_water_weight;
 
   final double fat_mass;
 
@@ -103,6 +103,19 @@ class DeviceData {
 
   final String physique_rating;
 
+  String formatDate(Date d) {
+    final f = d.formatter;
+
+    return '${f.wN} ${f.d} ${f.mN} ${f.yy}';
+  }
+
+  String getHijriFormatDate() {
+    DateFormat format = new DateFormat("dd/MM/yyyy");
+    DateTime dateTime = format.parse(date);
+    Gregorian gregorian = Gregorian.fromDateTime(dateTime);
+    return formatDate(Jalali.fromGregorian(gregorian));
+  }
+
   DeviceData(
       {required this.center,
       required this.device_model,
@@ -132,7 +145,7 @@ class DeviceData {
       required this.bmr,
       required this.metabolic_age,
       required this.total_water_percentage,
-      required this.total_Water_weight,
+      required this.total_water_weight,
       required this.fat_mass,
       required this.ffm,
       required this.fat_right_leg_m,
@@ -188,7 +201,7 @@ class DeviceData {
             bmr: data[index]['bmr'],
             metabolic_age: data[index]['metabolic_age'],
             total_water_percentage: data[index]['total_water_percentage'],
-            total_Water_weight: data[index]['total_Water_weight'],
+            total_water_weight: data[index]['total_water_weight'],
             fat_mass: data[index]['fat_mass'],
             ffm: data[index]['ffm'],
             fat_right_leg_m: data[index]['fat_right_leg_m'],
@@ -212,7 +225,7 @@ class DeviceData {
             upper_muscle_m: data[index]['upper_muscle_m'],
             muscle_physique_rating: data[index]['muscle_physique_rating'],
             physique_rating: data[index]['physique_rating'],
-            center: data[index]['physique_rating'])));
+            center: data[index]['center'])));
   }
 }
 
