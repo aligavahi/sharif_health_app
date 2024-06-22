@@ -95,7 +95,7 @@ class NetworkProvider {
 
   static Future<List<Map>> getDeviceData() async {
     Map data = await getData(urlGetDeviceData, {},
-        headers: {'HTTP_AUTHORIZATION': "Bearer ${Storage.getToken()}"});
+        headers: {'AUTHORIZATION': "Bearer ${Storage.getToken()}"});
     if (data.isNotEmpty) {
       return data['data'];
     } else {
