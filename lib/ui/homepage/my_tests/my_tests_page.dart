@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sharif_health_app/model/homepage/my_tests/my_tests_cubit.dart';
+import 'package:sharif_health_app/ui/homepage/my_tests/test_summary_section.dart';
 
 class MyTestsPage extends StatelessWidget {
   const MyTestsPage({super.key});
@@ -28,20 +29,19 @@ class MyTestsPage extends StatelessWidget {
           builder: (context, state) {
             Widget inner;
             if (state is MyTestsDataReady) {
-
               if (state.tests.isNotEmpty) {
-                inner = getTestsPage(state.tests);
+                inner = getTestsPage(state.tests, context);
               } else {
                 inner = getEmptyTestPage();
               }
-            } else {
-              inner = getEmptyTestPage();
+              return Container(
+                padding: EdgeInsets.only(left: 12, right: 10, bottom: 12),
+                child: inner,
+              );
+            } else if (state is MyTestsSeeDetail) {
+              return getDetailSection(state.tests[state.dataIndex], context);
             }
-
-            return Container(
-              padding: EdgeInsets.only(left: 12, right: 10, bottom: 12),
-              child: inner,
-            );
+            return Text("error");
           }),
     ));
   }
@@ -86,14 +86,16 @@ class MyTestsPage extends StatelessWidget {
     );
   }
 
-  Widget getTests(List<DeviceData> tests) {
+  Widget getTests(List<DeviceData> tests, context) {
     return Expanded(
         child: Column(
             children: List<InkWell>.generate(
                 tests.length,
                 (index) => InkWell(
-                  highlightColor: Colors.green,
-                    onTap: () {},
+                    highlightColor: Colors.green,
+                    onTap: () {
+                      BlocProvider.of<MyTestsCubit>(context).checkDetail(index);
+                    },
                     child: Row(children: [
                       const Spacer(),
                       Text(tests[index].getHijriFormatDate()),
@@ -121,11 +123,15 @@ class MyTestsPage extends StatelessWidget {
     ]);
   }
 
-  Widget getTestsPage(List<DeviceData> tests) {
+  Widget getTestsPage(List<DeviceData> tests, context) {
     return Column(children: [
       getHeader(),
-      Container(child: getTests(tests)),
+      Container(child: getTests(tests, context)),
       getFooterNote()
     ]);
+  }
+
+  Widget getDetailSection(DeviceData test, BuildContext context) {
+    return TestSummarySection(data: test);
   }
 }

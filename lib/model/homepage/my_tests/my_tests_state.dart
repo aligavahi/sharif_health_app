@@ -106,18 +106,20 @@ class DeviceData {
   String formatDate(Date d) {
     final f = d.formatter;
 
-    return '${f.wN} ${f.d} ${f.mN} ${f.yy}';
+    return '${f.wN} ${f.d} ${f.mN} ${f.yyyy}';
   }
 
   String getHijriFormatDate() {
     DateFormat format = new DateFormat("dd/MM/yyyy");
-    DateTime dateTime = format.parse(date);
+
+    DateTime dateTime = format.parse(date.replaceAll('"', ''));
     Gregorian gregorian = Gregorian.fromDateTime(dateTime);
     return formatDate(Jalali.fromGregorian(gregorian));
   }
 
   DeviceData(
-      {required this.center,
+      {
+      required this.center,
       required this.device_model,
       required this.load_dt,
       required this.date,
@@ -242,4 +244,10 @@ final class MyTestsInitial extends MyTestsState {
 
 final class MyTestsDataReady extends MyTestsState {
   const MyTestsDataReady({required super.tests});
+}
+
+final class MyTestsSeeDetail extends MyTestsState {
+  final int dataIndex;
+
+  const MyTestsSeeDetail({required super.tests, required this.dataIndex});
 }
