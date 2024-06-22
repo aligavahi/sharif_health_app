@@ -24,7 +24,7 @@ class NetworkProvider {
     reqHeaders.addAll(headers);
     print(reqHeaders);
     final response = await http.post(
-      Uri.parse('https://$host:$port/$namespace/$path/'),
+      Uri.parse('https://$host/$namespace/$path/'),
       headers: reqHeaders,
       body: json.encode(data),
     );
