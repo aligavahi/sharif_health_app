@@ -3,6 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:sharif_health_app/provider/storage.dart';
 
 class NetworkProvider {
+  static String namespace= 'api';
   static String host = "ezcar.ir";
   static int port = 8569;
   static String urlSignup = 'signup';
@@ -23,10 +24,11 @@ class NetworkProvider {
     reqHeaders.addAll(headers);
     print(reqHeaders);
     final response = await http.post(
-      Uri.parse('https://$host:$port/$path/'),
+      Uri.parse('https://$host:$port/$namespace/$path/'),
       headers: reqHeaders,
       body: json.encode(data),
     );
+    print("sdsdsdsd");
     print(response.body);
     return response;
   }
@@ -93,7 +95,7 @@ class NetworkProvider {
 
   static Future<List<Map>> getDeviceData() async {
     Map data = await getData(urlGetDeviceData, {},
-        headers: {'HTTP_AUTHORIZATION': "SIMPLE ${Storage.getToken()}"});
+        headers: {'HTTP_AUTHORIZATION': "Bearer ${Storage.getToken()}"});
     if (data.isNotEmpty) {
       return data['data'];
     } else {
