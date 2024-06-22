@@ -23,7 +23,6 @@ class Storage {
   static loadToken() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     model.token = prefs.getString(_tokenKey) ?? '';
-    model.token = '70d4c21790f94823dee3f677f7e4d1de'; // todo: remove this line
   }
 
   static String getToken() {
