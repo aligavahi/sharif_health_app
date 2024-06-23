@@ -93,11 +93,12 @@ class TestSummarySection extends StatelessWidget {
             margin: EdgeInsets.all(10),
             child: ListTile(
               title: Text(
-                  textAlign: TextAlign.center,
-                  items.keys.toList()[index],
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
-              subtitle: Center(child: Text(items.values.toList()[index].toString())),
+                textAlign: TextAlign.center,
+                items.keys.toList()[index],
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              subtitle:
+                  Center(child: Text(items.values.toList()[index].toString())),
             ),
           );
         },

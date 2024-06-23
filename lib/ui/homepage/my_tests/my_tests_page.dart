@@ -41,7 +41,7 @@ class MyTestsPage extends StatelessWidget {
             } else if (state is MyTestsSeeDetail) {
               return getDetailSection(state.tests[state.dataIndex], context);
             }
-            return Text("error");
+            return const Center(child:Text("در حال دریافت اطلاعات ..."));
           }),
     ));
   }
