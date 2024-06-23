@@ -41,12 +41,16 @@ class MyTestsPage extends StatelessWidget {
             } else if (state is MyTestsSeeDetail) {
               return getDetailSection(state.tests[state.dataIndex], context);
             }
-            return const Center(child:Text("در حال دریافت اطلاعات ..."));
+            return const Center(
+                child: Text(
+              "در حال دریافت اطلاعات ...",
+              textDirection: TextDirection.rtl,
+            ));
           }),
     ));
   }
 
-  Widget getFooterNote() {
+  Widget getFooterNote(bool empty) {
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
@@ -57,7 +61,7 @@ class MyTestsPage extends StatelessWidget {
           child: InkWell(
               onTap: () {},
               child: Text(
-                emptyDetail,
+                empty ? emptyDetail : notEmptyDetail,
                 textDirection: TextDirection.rtl,
               ))),
     );
@@ -70,17 +74,17 @@ class MyTestsPage extends StatelessWidget {
           borderRadius: BorderRadius.circular(10), color: Colors.blueAccent),
       child: Row(
         children: [
-          Spacer(),
+          Spacer(flex: 3,),
           Text("تاریخ", style: style),
           Spacer(
-            flex: 2,
+            flex: 7,
           ),
           Text("مرکز تست", style: style),
           Spacer(
-            flex: 2,
+            flex: 5,
           ),
           Text("شماره", style: style),
-          Spacer(),
+          Spacer(flex: 2,),
         ],
       ),
     );
@@ -88,27 +92,31 @@ class MyTestsPage extends StatelessWidget {
 
   Widget getTests(List<DeviceData> tests, context) {
     return Expanded(
-        child: Column(
-            children: List<InkWell>.generate(
+        child: ListView(
+            children: List<SizedBox>.generate(
                 tests.length,
-                (index) => InkWell(
-                    highlightColor: Colors.green,
-                    onTap: () {
-                      BlocProvider.of<MyTestsCubit>(context).checkDetail(index);
-                    },
-                    child: Row(children: [
-                      const Spacer(),
-                      Text(tests[index].getHijriFormatDate()),
-                      const Spacer(
-                        flex: 2,
-                      ),
-                      Text(tests[index].center),
-                      const Spacer(
-                        flex: 2,
-                      ),
-                      Text(index.toString()),
-                      const Spacer(),
-                    ])))));
+                (index) => SizedBox(
+                    height: 50,
+                    child: Card(
+                        child: InkWell(
+                            highlightColor: Colors.green,
+                            onTap: () {
+                              BlocProvider.of<MyTestsCubit>(context)
+                                  .checkDetail(index);
+                            },
+                            child: Row(children: [
+                              const Spacer(),
+                              Text(tests[index].getHijriFormatDate()),
+                              const Spacer(
+                                flex: 2,
+                              ),
+                              Text(tests[index].center),
+                              const Spacer(
+                                flex: 2,
+                              ),
+                              Text(index.toString()),
+                              const Spacer(),
+                            ])))))));
   }
 
   Widget getEmptyTestPage() {
@@ -119,7 +127,7 @@ class MyTestsPage extends StatelessWidget {
         "assets/mytests/no_data.png",
         fit: BoxFit.fitWidth,
       )),
-      getFooterNote()
+      getFooterNote(true)
     ]);
   }
 
@@ -127,7 +135,7 @@ class MyTestsPage extends StatelessWidget {
     return Column(children: [
       getHeader(),
       Container(child: getTests(tests, context)),
-      getFooterNote()
+      getFooterNote(false)
     ]);
   }
 
