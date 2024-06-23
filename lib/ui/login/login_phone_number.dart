@@ -83,7 +83,7 @@ class LoginPhoneNumber extends StatelessWidget {
               ]),
             ),
             const Spacer(
-              flex: 4,
+              flex: 3,
             ),
             Container(
               height: min(50.0,max_item_height),
