@@ -32,32 +32,34 @@ class MyApp extends StatelessWidget {
 
   Widget loginPage() {
     return Scaffold(
+        resizeToAvoidBottomInset: false,
         body: BlocProvider<LoginCubit>(
-      create: (BuildContext context) => LoginCubit(),
-      child: BlocConsumer<LoginCubit, LoginState>(listener: (context, state) {
-        if (state is LoginSuccess) {
-          Navigator.pushNamed(context, '/home');
-        }
-      }, builder: (context, state) {
-        if (state is LoginFirstPage) return FirstPage();
-        if (state is LoginInitial || state is LoginFailedSms)
-          return LoginPhoneNumber();
-        if (state is LoginCodeSent || state is LoginFailedCode)
-          return LoginCode(phoneNumber: state.phoneNumber);
-        return FirstPage();
-      }),
-    ));
+          create: (BuildContext context) => LoginCubit(),
+          child:
+              BlocConsumer<LoginCubit, LoginState>(listener: (context, state) {
+            if (state is LoginSuccess) {
+              Navigator.pushNamed(context, '/home');
+            }
+          }, builder: (context, state) {
+            if (state is LoginFirstPage) return FirstPage();
+            if (state is LoginInitial || state is LoginFailedSms)
+              return LoginPhoneNumber();
+            if (state is LoginCodeSent || state is LoginFailedCode)
+              return LoginCode(phoneNumber: state.phoneNumber);
+            return FirstPage();
+          }),
+        ));
   }
 
   Widget homePage() {
     return Scaffold(
         body: BlocProvider<HomepageCubit>(
-        create: (BuildContext context) => HomepageCubit(),
-          child: BlocConsumer<HomepageCubit, HomepageState>(
-            listener: (context, state) {},
-            builder: (context, state) {
+      create: (BuildContext context) => HomepageCubit(),
+      child: BlocConsumer<HomepageCubit, HomepageState>(
+          listener: (context, state) {},
+          builder: (context, state) {
             if (state is HomepageInitial)
-                    return HomePage(index: state.pageNumber);
+              return HomePage(index: state.pageNumber);
             return HomePage(index: state.pageNumber);
           }),
     ));

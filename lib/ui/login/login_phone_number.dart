@@ -72,6 +72,8 @@ class LoginPhoneNumber extends StatelessWidget {
                 Expanded(
                   flex: 20,
                   child: TextField(
+                      autofocus: true,
+                      keyboardType: TextInputType.phone,
                       onChanged: (value) {
                         BlocProvider.of<LoginCubit>(context)
                             .updatePhoneNumber(value);

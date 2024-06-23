@@ -86,15 +86,18 @@ class TestSummarySection extends StatelessWidget {
       body: GridView.builder(
         itemCount: items.length,
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 3,
+          crossAxisCount: 2,
         ),
         itemBuilder: (BuildContext context, int index) {
           return Card(
-            margin: EdgeInsets.all(5),
+            margin: EdgeInsets.all(10),
             child: ListTile(
-              leading: Icon(Icons.account_circle),
-              title: Text(items.keys.toList()[index]),
-              subtitle: Text(items.values.toList()[index].toString()),
+              title: Text(
+                  textAlign: TextAlign.center,
+                  items.keys.toList()[index],
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+              subtitle: Center(child: Text(items.values.toList()[index].toString())),
             ),
           );
         },
