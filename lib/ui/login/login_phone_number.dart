@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sharif_health_app/model/login/login_cubit.dart';
@@ -23,6 +25,7 @@ class LoginPhoneNumber extends StatelessWidget {
   }
 
   Widget getForm(context) {
+    double max_item_height = MediaQuery.of(context).size.height * .35 / 4;
     return Container(
         margin: EdgeInsets.fromLTRB(
           40,
@@ -30,7 +33,7 @@ class LoginPhoneNumber extends StatelessWidget {
           40,
           MediaQuery.of(context).size.height * .20,
         ),
-        padding: const EdgeInsets.all(20),
+        padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
             color: Color.fromRGBO(245, 245, 245, 1),
             borderRadius: BorderRadius.circular(15.0)),
@@ -39,13 +42,13 @@ class LoginPhoneNumber extends StatelessWidget {
           children: [
             Center(
               child: SizedBox(
-                height: 300,
+                height: MediaQuery.of(context).size.height * .25,
                 child: Image.asset("assets/3.png"),
               ),
             ),
             Center(
               child: SizedBox(
-                height: 30,
+                height: min(30.0,max_item_height),
                 child: Text(
                   title,
                   style: const TextStyle(fontWeight: FontWeight.bold),
@@ -53,7 +56,7 @@ class LoginPhoneNumber extends StatelessWidget {
               ),
             ),
             SizedBox(
-              height: 30,
+              height: min(30,max_item_height),
               child: Text(detail),
             ),
             const Spacer(),
@@ -62,7 +65,7 @@ class LoginPhoneNumber extends StatelessWidget {
               decoration: BoxDecoration(
                   border: Border.all(),
                   borderRadius: BorderRadius.circular(20.0)),
-              height: 50,
+              height: min(50.0,max_item_height),
               child: Row(children: [
                 Icon(Icons.phone),
                 Spacer(),
@@ -70,7 +73,8 @@ class LoginPhoneNumber extends StatelessWidget {
                   flex: 20,
                   child: TextField(
                       onChanged: (value) {
-                        BlocProvider.of<LoginCubit>(context).updatePhoneNumber(value);
+                        BlocProvider.of<LoginCubit>(context)
+                            .updatePhoneNumber(value);
                       },
                       decoration: InputDecoration(border: InputBorder.none)),
                 )
@@ -80,7 +84,7 @@ class LoginPhoneNumber extends StatelessWidget {
               flex: 4,
             ),
             Container(
-              height: 50,
+              height: min(50.0,max_item_height),
               decoration:
                   BoxDecoration(borderRadius: BorderRadius.circular(20.0)),
               child: ElevatedButton(
@@ -90,7 +94,6 @@ class LoginPhoneNumber extends StatelessWidget {
                   ),
                   padding: EdgeInsets.zero,
                   elevation: 4,
-                  backgroundColor: Colors.transparent,
                 ),
                 onPressed: () {
                   BlocProvider.of<LoginCubit>(context).sendSms();

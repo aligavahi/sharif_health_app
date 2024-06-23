@@ -30,9 +30,10 @@ class FirstPage extends StatelessWidget {
                 const Spacer(
                   flex: 8,
                 ),
-                SizedBox(
-                  width: MediaQuery.of(context).size.width * .6,
-                  height: 60,
+                Container(
+                  height: 50,
+                  decoration:
+                      BoxDecoration(borderRadius: BorderRadius.circular(20.0)),
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       shape: RoundedRectangleBorder(
@@ -40,7 +41,6 @@ class FirstPage extends StatelessWidget {
                       ),
                       padding: EdgeInsets.zero,
                       elevation: 4,
-                      backgroundColor: Colors.transparent,
                     ),
                     onPressed: () {
                       BlocProvider.of<LoginCubit>(context).goPhoneNumber();
@@ -48,13 +48,12 @@ class FirstPage extends StatelessWidget {
                     child: Ink.image(
                       image: const AssetImage('assets/2.png'),
                       fit: BoxFit.cover,
-                      child: const SizedBox(
+                      child: SizedBox(
                         width: double.infinity,
                         height: double.infinity,
                         child: Center(
                           child: Text(
-                            'ورود/ثبت نام',
-                          ),
+                              'ورود/ثبت نام'),
                         ),
                       ),
                     ),
