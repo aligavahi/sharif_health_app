@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sharif_health_app/model/homepage/homepage_cubit.dart';
 import 'package:sharif_health_app/ui/homepage/my_tests/my_tests_page.dart';
+import 'package:sharif_health_app/ui/homepage/profile/profile_page.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key, required this.index});
@@ -52,7 +53,7 @@ class HomePage extends StatelessWidget {
   getBody() {
     switch (index) {
       case 0:
-        break;
+        return const ProfilePage();
       case 1:
         break;
       case 2:

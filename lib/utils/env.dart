@@ -1,0 +1,4 @@
+enum RunEnvironment{
+  dev,
+  prod
+}
