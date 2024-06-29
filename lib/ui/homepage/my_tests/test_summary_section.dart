@@ -10,6 +10,125 @@ class TestSummarySection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final items = Map<String, dynamic>();
+
+    List<Map<String, dynamic>> fatAnalysis = [
+      {
+        'name': 'وزن بدون احتصاب چربی',
+        'unit': 'کیلوگرم',
+        'icon': 'icon_fat_weight.png',
+        'value': data.fat_mass,
+        'percentage': ''
+      },
+      {
+        'name': 'کل چربی بدن',
+        'unit': 'کیلوگرم',
+        'icon': 'icon_fat_body.png',
+        'value': data.fat_trunk_m,
+        'percentage': data.fat_trunk_p
+      },
+      {
+        'name': 'شاخص چربی احشایی',
+        'unit': '',
+        'icon': 'icon_fat_visceral.png',
+        'value': data.visceral_fat_rating,
+        'percentage': ''
+      },
+      {
+        'name': 'چربی نیم تنه بالایی',
+        'unit': 'کیلوگرم',
+        'icon': 'icon_fat_top.png',
+        'value': data.upper_fat_m,
+        'percentage': ''
+      },
+      {
+        'name': 'چربی دست راست',
+        'unit': 'کیلوگرم',
+        'icon': 'icon_fat_right_hand.png',
+        'value': data.fat_right_arm_m,
+        'percentage': data.fat_right_arm_p
+      },
+      {
+        'name': 'چربی دست چپ',
+        'unit': 'کیلوگرم',
+        'icon': 'icon_fat_left_hand.png',
+        'value': data.fat_left_arm_m,
+        'percentage': data.fat_left_arm_p
+      },
+      {
+        'name': 'چربی پا راست',
+        'unit': 'کیلوگرم',
+        'icon': 'icon_fat_right_foot.png',
+        'value': data.fat_right_arm_m,
+        'percentage': data.fat_right_leg_p
+      },
+      {
+        'name': 'چربی پا چپ',
+        'unit': 'کیلوگرم',
+        'icon': 'icon_fat_left_foot.png',
+        'value': data.fat_left_leg_m,
+        'percentage': data.fat_left_leg_p
+      }
+    ];
+
+    List<Map<String, dynamic>> muscleAnalysis = [
+      {
+        'name': 'وزن بدون احتصاب چربی',
+        'unit': 'کیلوگرم',
+        'icon': 'icon_fat_weight.png',
+        'value': data.fat_mass,
+        'percentage': ''
+      },
+      {
+        'name': 'کل چربی بدن',
+        'unit': 'کیلوگرم',
+        'icon': 'icon_fat_body.png',
+        'value': data.fat_trunk_m,
+        'percentage': data.fat_trunk_p
+      },
+      {
+        'name': 'شاخص چربی احشایی',
+        'unit': '',
+        'icon': 'icon_fat_visceral.png',
+        'value': data.visceral_fat_rating,
+        'percentage': ''
+      },
+      {
+        'name': 'چربی نیم تنه بالایی',
+        'unit': 'کیلوگرم',
+        'icon': 'icon_fat_top.png',
+        'value': data.upper_fat_m,
+        'percentage': ''
+      },
+      {
+        'name': 'چربی دست راست',
+        'unit': 'کیلوگرم',
+        'icon': 'icon_fat_right_hand.png',
+        'value': data.fat_right_arm_m,
+        'percentage': data.fat_right_arm_p
+      },
+      {
+        'name': 'چربی دست چپ',
+        'unit': 'کیلوگرم',
+        'icon': 'icon_fat_left_hand.png',
+        'value': data.fat_left_arm_m,
+        'percentage': data.fat_left_arm_p
+      },
+      {
+        'name': 'چربی پا راست',
+        'unit': 'کیلوگرم',
+        'icon': 'icon_fat_right_foot.png',
+        'value': data.fat_right_arm_m,
+        'percentage': data.fat_right_leg_p
+      },
+      {
+        'name': 'چربی پا چپ',
+        'unit': 'کیلوگرم',
+        'icon': 'icon_fat_left_foot.png',
+        'value': data.fat_left_leg_m,
+        'percentage': data.fat_left_leg_p
+      }
+    ];
+
     items.addAll({
       'center': data.center,
       'device_model': data.device_model,
@@ -64,44 +183,89 @@ class TestSummarySection extends StatelessWidget {
       'muscle_physique_rating': data.muscle_physique_rating,
       'physique_rating': data.physique_rating,
     });
+
+    List<Widget> fat_header = [Center(child: Text("آنالیز چربی"))];
+    List<Widget> fat_list = List<Card>.generate(
+        fatAnalysis.length, (index) =>
+        get_card_item(context, fatAnalysis[index])
+    );
+
+    List<Widget> muscle_header = [Center(child: Text("آنالیز عضلات"))];
+    List<Widget> muscle_list = List<Card>.generate(
+        fatAnalysis.length, (index) =>
+        get_card_item(context, muscleAnalysis[index])
+    );
+    List<Widget> final_list = [];
+    final_list.addAll(fat_header);
+    final_list.addAll(fat_list);
+    final_list.addAll(muscle_header);
+    final_list.addAll(muscle_list);
+
     return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () {
-            BlocProvider.of<MyTestsCubit>(context).goBack();
-          },
-        ),
-        title: Center(
-            child: Row(children: [
-          Spacer(),
-          Text(data.getHijriFormatDate()),
-          Spacer(
-            flex: 2,
+        appBar: AppBar(
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back),
+            onPressed: () {
+              BlocProvider.of<MyTestsCubit>(context).goBack();
+            },
           ),
-          Text(data.center),
-          Spacer(),
-        ])),
-      ),
-      body: GridView.builder(
-        itemCount: items.length,
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
+          title: Center(
+              child: Row(children: [
+                Spacer(),
+                Text(data.getHijriFormatDate()),
+                Spacer(
+                  flex: 2,
+                ),
+                Text(data.center),
+                Spacer(),
+              ])),
         ),
-        itemBuilder: (BuildContext context, int index) {
-          return Card(
-            margin: EdgeInsets.all(10),
-            child: ListTile(
-              title: Text(
-                textAlign: TextAlign.center,
-                items.keys.toList()[index],
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-              subtitle:
-                  Center(child: Text(items.values.toList()[index].toString())),
-            ),
-          );
-        },
+        body: ListView(
+            children: final_list));
+  }
+
+  get_card_item(context, Map<String, dynamic> item) {
+    return Card(
+      child: ListTile(
+        title: Row(children: [
+          SizedBox(
+              width: MediaQuery
+                  .of(context)
+                  .size
+                  .width * .2,
+              child: Text(
+                '${item['value']} ${item['unit']}',
+                textDirection: TextDirection.rtl,
+              )),
+          Spacer(),
+          SizedBox(
+              width: MediaQuery
+                  .of(context)
+                  .size
+                  .width * .15,
+              child: Text(
+                  item['percentage'] == ''
+                      ? ""
+                      : "${item['percentage']} %",
+                  textDirection: TextDirection.rtl)),
+          Spacer(),
+          SizedBox(
+              width: MediaQuery
+                  .of(context)
+                  .size
+                  .width * .35,
+              child: Text(item['name'],
+                  textDirection: TextDirection.rtl)),
+        ]),
+        trailing: SizedBox(
+          width: MediaQuery
+              .of(context)
+              .size
+              .width * .1,
+          child: Image.asset(
+            "assets/mytests/${item['icon']}",
+          ),
+        ),
       ),
     );
   }
