@@ -20,4 +20,5 @@ class MyTestsCubit extends Cubit<MyTestsState> {
   goBack() {
     emit(MyTestsDataReady(tests: state.tests));
   }
+
 }

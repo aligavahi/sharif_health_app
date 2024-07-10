@@ -1,22 +1,40 @@
 part of 'profile_cubit.dart';
 
-@immutable
-sealed class ProfileState {}
+final class ProfileState {
+   final Map<String,dynamic> profileData;
 
-final class ProfileInitial extends ProfileState {}
+  ProfileState(this.profileData);
 
-final class ProfileEdit extends ProfileState {}
+}
 
-final class ProfileMessage extends ProfileState {}
+final class ProfileInitial extends ProfileState {
 
-final class ProfileTransactionHistory extends ProfileState {}
+  ProfileInitial(super.profileData);
 
-final class ProfileContactUs extends ProfileState {}
+}
 
-final class ProfileShare extends ProfileState {}
+final class ProfileEdit extends ProfileState {
+  ProfileEdit(super.profileData);
+}
+
+final class ProfileMessage extends ProfileState {
+  ProfileMessage(super.profileData);
+}
+
+final class ProfileTransactionHistory extends ProfileState {
+  ProfileTransactionHistory(super.profileData);
+}
+
+final class ProfileContactUs extends ProfileState {
+  ProfileContactUs(super.profileData);
+}
+
+final class ProfileShare extends ProfileState {
+  ProfileShare(super.profileData);
+}
 
 final class ProfileLogout extends ProfileState {
   final bool confirmed;
 
-  ProfileLogout({required this.confirmed});
+  ProfileLogout(super.profileData, {required this.confirmed});
 }

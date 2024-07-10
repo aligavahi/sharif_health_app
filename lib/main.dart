@@ -6,6 +6,7 @@ import 'package:sharif_health_app/ui/homepage/home_page.dart';
 import 'package:sharif_health_app/ui/login/first_page.dart';
 import 'package:sharif_health_app/ui/login/login_code.dart';
 import 'package:sharif_health_app/ui/login/login_phone_number.dart';
+import 'package:sharif_health_app/utils/app_thems.dart';
 
 void main() {
   runApp(const MyApp());
@@ -19,11 +20,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         title: 'سلامت شربف',
-        theme: ThemeData(
-          fontFamily: 'Kalameh',
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.green),
-          useMaterial3: true,
-        ),
+        theme: appTheme,
         routes: {
           '/': (context) => loginPage(),
           '/home': (context) => homePage()

@@ -31,8 +31,8 @@ class NetworkProvider {
     return response;
   }
 
-  static Future<bool> postData(String path, Map<String, String> data) async {
-    http.Response response = await request(path, data);
+  static Future<bool> postData(String path, Map<String, dynamic> data,{Map<String, String> headers = const {}}) async {
+    http.Response response = await request(path, data,headers: headers);
     if (response.statusCode == 200) {
       try {
         data = json.decode(response.body);
@@ -104,4 +104,22 @@ class NetworkProvider {
       return [];
     }
   }
+
+
+  static Future<bool> submitPersonalInfo(Map<String, dynamic> data) async {
+    return await postData(urlUpdateAccountInfo, data,
+        headers: {'AUTHORIZATION': "Bearer ${Storage.getToken()}"});
+  }
+
+  static Future<Map<String,dynamic>> getProfileData() async {
+    Map data = await getData(urlGetAccountInfo, {},
+        headers: {'AUTHORIZATION': "Bearer ${Storage.getToken()}"});
+    if (data.isNotEmpty) {
+      Map<String,dynamic> dataInfo = data['data'];
+      return dataInfo;
+    } else {
+      return {};
+    }
+  }
+
 }

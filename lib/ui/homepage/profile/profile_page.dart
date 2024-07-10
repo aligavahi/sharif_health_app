@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sharif_health_app/model/homepage/profile/profile_cubit.dart';
 import 'package:sharif_health_app/ui/homepage/profile/exit_dialog.dart';
+import 'package:sharif_health_app/ui/homepage/profile/personal_info_section.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
@@ -9,15 +10,15 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<ProfileCubit>(
-
         create: (BuildContext context) => ProfileCubit(),
         child: BlocConsumer<ProfileCubit, ProfileState>(
           listener: (context, state) {
             if (state is ProfileLogout) {
-              if (state.confirmed){
+              if (state.confirmed) {
                 Navigator.pushNamed(context, '/');
-              }else {
-                showDialog(context: context,
+              } else {
+                showDialog(
+                    context: context,
                     builder: (buildContext) =>
                         ExitDialog(BlocProvider.of<ProfileCubit>(context)));
               }
@@ -25,14 +26,20 @@ class ProfilePage extends StatelessWidget {
           },
           builder: (context, state) {
             if (state is ProfileInitial || state is ProfileLogout) {
-              return getMainProfilePage(context);
+              return getMainProfilePage(context,state);
+            } else if (state is ProfileEdit) {
+              return getEditProfilePage(context, state);
             }
             return const Center(child: Text("در حال دریافت اطلاعات"));
           },
         ));
   }
 
-  getMainProfilePage(context) {
+  getEditProfilePage(context, state) {
+    return PersonalInfoSection(state);
+  }
+
+  getMainProfilePage(context,ProfileState state) {
     return Scaffold(
       body: Container(
         width: double.infinity,
@@ -64,8 +71,8 @@ class ProfilePage extends StatelessWidget {
                 ],
               ),
             ),
-            Text("علی گواهی"),
-            Text("0221013025"),
+            Text("${state.profileData['first_name']} ${state.profileData['last_name']}",textDirection: TextDirection.rtl,),
+            Text("${state.profileData['mobile_number']}"),
             Expanded(
               child: Container(
                   width: double.infinity,
@@ -78,7 +85,8 @@ class ProfilePage extends StatelessWidget {
                     children: [
                       ListTile(
                         onTap: () {
-                          // BlocProvider.of<ProfileCubit>(context).onLogout();
+                          BlocProvider.of<ProfileCubit>(context)
+                              .onProfileEdit();
                         },
                         leading: Icon(Icons.arrow_back_ios),
                         title: Text(
