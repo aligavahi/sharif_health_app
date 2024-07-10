@@ -18,15 +18,15 @@ class TestSummarySection extends StatelessWidget {
         'name': 'وزن بدون احتساب چربی',
         'unit': 'کیلوگرم',
         'icon': 'icon_fat_weight.png',
-        'value': data.fat_mass,
+        'value': data.ffm,
         'percentage': ''
       },
       {
         'name': 'کل چربی بدن',
         'unit': 'کیلوگرم',
         'icon': 'icon_fat_body.png',
-        'value': data.fat_trunk_m,
-        'percentage': data.fat_trunk_p
+        'value': data.fat_mass,
+        'percentage': ''
       },
       {
         'name': 'شاخص چربی احشایی',
@@ -39,8 +39,8 @@ class TestSummarySection extends StatelessWidget {
         'name': 'چربی نیم تنه بالایی',
         'unit': 'کیلوگرم',
         'icon': 'icon_fat_top.png',
-        'value': data.upper_fat_m,
-        'percentage': ''
+        'value': data.fat_trunk_m,
+        'percentage': fat_trunk_p
       },
       {
         'name': 'چربی دست راست',
@@ -60,7 +60,7 @@ class TestSummarySection extends StatelessWidget {
         'name': 'چربی پا راست',
         'unit': 'کیلوگرم',
         'icon': 'icon_fat_right_foot.png',
-        'value': data.fat_right_arm_m,
+        'value': data.fat_right_leg_m,
         'percentage': data.fat_right_leg_p
       },
       {
@@ -84,7 +84,7 @@ class TestSummarySection extends StatelessWidget {
         'name': 'وزن عضلات اسکلتی',
         'unit': 'کیلوگرم',
         'icon': 'icon_fat_body.png',
-        'value': data.muscle_trunk_m,
+        'value': data.smm,
         'percentage': ''
       },
       {
@@ -162,7 +162,7 @@ class TestSummarySection extends StatelessWidget {
         'unit': '',
         'icon': 'general2_icon2.png',
         'image': 'general2_image2.png',
-        'value': data.ffm,
+        'value': data.bmi,
         'percentage': ''
       },
       {
