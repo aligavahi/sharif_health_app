@@ -40,7 +40,7 @@ class TestSummarySection extends StatelessWidget {
         'unit': 'کیلوگرم',
         'icon': 'icon_fat_top.png',
         'value': data.fat_trunk_m,
-        'percentage': fat_trunk_p
+        'percentage': data.fat_trunk_p
       },
       {
         'name': 'چربی دست راست',
