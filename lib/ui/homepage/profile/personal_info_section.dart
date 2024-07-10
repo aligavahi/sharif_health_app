@@ -160,13 +160,15 @@ class PersonalInfoSection extends StatelessWidget {
         ));
   }
 
-  to_jalali(stringDate) {
-    intl.DateFormat format = new intl.DateFormat("yyyy-MM-dd");
-    DateTime dateTime =  format.parse(stringDate);
-    Gregorian gregorian = Gregorian.fromDateTime(dateTime);
-    Jalali jalali = Jalali.fromGregorian(gregorian);
-    final f = jalali.formatter;
-    return "${f.yyyy}-${f.mm}-${f.dd}";
+  to_jalali(String ?stringDate) {
+    if(stringDate!=null) {
+      intl.DateFormat format = new intl.DateFormat("yyyy-MM-dd");
+      DateTime dateTime = format.parse(stringDate);
+      Gregorian gregorian = Gregorian.fromDateTime(dateTime);
+      Jalali jalali = Jalali.fromGregorian(gregorian);
+      final f = jalali.formatter;
+      return "${f.yyyy}-${f.mm}-${f.dd}";
+    }
   }
 
   to_gregori(String? stringDate) {

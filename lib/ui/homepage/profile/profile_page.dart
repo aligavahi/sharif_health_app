@@ -71,7 +71,7 @@ class ProfilePage extends StatelessWidget {
                 ],
               ),
             ),
-            Text("${state.profileData['first_name']} ${state.profileData['last_name']}",textDirection: TextDirection.rtl,),
+            Text(get_username(state.profileData),textDirection: TextDirection.rtl,),
             Text("${state.profileData['mobile_number']}"),
             Expanded(
               child: Container(
@@ -136,5 +136,10 @@ class ProfilePage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  String get_username(data) {
+    data = "${data['first_name']??""} ${data['last_name']??""}".trim();
+    return data;
   }
 }
