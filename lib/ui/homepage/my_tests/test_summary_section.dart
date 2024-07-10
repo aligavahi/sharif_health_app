@@ -15,7 +15,7 @@ class TestSummarySection extends StatelessWidget {
   Widget build(BuildContext context) {
     List<Map<String, dynamic>> fatAnalysis = [
       {
-        'name': 'وزن بدون احتصاب چربی',
+        'name': 'وزن بدون احتساب چربی',
         'unit': 'کیلوگرم',
         'icon': 'icon_fat_weight.png',
         'value': data.fat_mass,
