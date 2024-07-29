@@ -4,7 +4,7 @@ import 'package:sharif_health_app/provider/storage.dart';
 
 class NetworkProvider {
   static String namespace = 'api';
-  static String host = "ezcar.ir";
+  static String host = "app.healthapp.ir";
   static int port = 80;
   static String urlSignup = 'signup';
   static String urlSendSms = 'send_sms';
