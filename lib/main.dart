@@ -37,14 +37,14 @@ class MyApp extends StatelessWidget {
                 Navigator.pushNamed(context, '/home');
             }
           }, builder: (context, state) {
-                if (state is LoginFirstPage) return const FirstPage();
+                if (state is LoginFirstPage) return FirstPage(context: context,);
                 if (state is LoginInitial || state is LoginFailedSms) {
                   return const LoginPhoneNumber();
                 }
                 if (state is LoginCodeSent || state is LoginFailedCode) {
                   return LoginCode(phoneNumber: state.phoneNumber);
                 }
-                return const FirstPage();
+                return FirstPage(context: context,);
           }),
         ));
   }

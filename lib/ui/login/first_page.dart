@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sharif_health_app/model/login/login_cubit.dart';
 import 'package:sharif_health_app/utils/app_colors.dart';
@@ -7,14 +6,14 @@ import 'package:sharif_health_app/utils/app_colors.dart';
 class FirstPage extends StatelessWidget {
   final String text = 'دستیار سلامتی و تناسب اندام شما';
 
-  const FirstPage({super.key});
+  FirstPage({super.key,required context}){
+    Future.delayed(const Duration(seconds: 10, milliseconds: 500), () {
+      BlocProvider.of<LoginCubit>(context).goPhoneNumber();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    SchedulerBinding.instance.addPostFrameCallback((_) => Future.delayed(
-        const Duration(seconds: 1,milliseconds: 500),
-        () => BlocProvider.of<LoginCubit>(context).goPhoneNumber()));
-
     return Container(
         width: double.infinity,
         decoration: const BoxDecoration(

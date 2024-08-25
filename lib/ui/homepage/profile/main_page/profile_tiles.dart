@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sharif_health_app/model/homepage/profile/profile_cubit.dart';
+import 'package:sharif_health_app/utils/app_colors.dart';
 
 class ProfileTile extends ListTile {
   const ProfileTile({super.key});
@@ -34,7 +35,7 @@ class ProfileTile extends ListTile {
           ),
           trailing: Image.asset(
             asset,
-            color: Color.fromRGBO(0xFD, 0x82, 0x0B, 1),
+            color: AppColors.orange,
           ),
         ));
   }
