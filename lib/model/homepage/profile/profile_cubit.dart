@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:intl/intl.dart';
-import 'package:meta/meta.dart';
 import 'package:shamsi_date/shamsi_date.dart';
 import 'package:sharif_health_app/provider/network.dart';
 import 'package:sharif_health_app/provider/storage.dart';
