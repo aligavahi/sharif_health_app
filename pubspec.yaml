@@ -46,6 +46,7 @@ dependencies:
   curved_labeled_navigation_bar: ^2.0.2
   flutter_tabbar_page: ^0.0.3
   vertical_scrollable_tabview: ^0.1.1
+  syncfusion_flutter_charts: ^26.2.10
 
 dev_dependencies:
   flutter_test:
