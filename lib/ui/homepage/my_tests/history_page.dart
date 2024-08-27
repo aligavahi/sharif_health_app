@@ -47,8 +47,10 @@ class HistoryPage extends StatelessWidget {
     );
     Widget titleText = Text(title[name] ?? "");
     Widget detailText = Text(details[name] ?? "");
-    return Column(
+    return Scaffold(
+        appBar: AppBar(),
+        body: Column(
       children: [stackWidget, titleText, detailText],
-    );
+    ));
   }
 }

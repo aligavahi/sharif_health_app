@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sharif_health_app/model/homepage/my_tests/my_tests_cubit.dart';
 import 'package:sharif_health_app/ui/homepage/my_tests/fat_analysis.dart';
 import 'package:sharif_health_app/ui/homepage/my_tests/general_analysis.dart';
@@ -38,6 +39,7 @@ class _TestSummarySectionState extends State<TestSummarySection>
       backgroundColor: AppColors.background,
       appBar: AppBar(
           backgroundColor: AppColors.white,
+          leading: InkWell(child: Icon(Icons.arrow_back),onTap: ()=>BlocProvider.of<MyTestsCubit>(context).goBack(),),
           title: ListTile(
             title: Text(
               "$titlePrefix ${widget.data.getHijriFormatDate()}",

@@ -39,6 +39,7 @@ class MyTestsPage extends StatelessWidget {
               }
               return Scaffold(
                   appBar: AppBar(
+                    automaticallyImplyLeading: false,
                     title: Center(child:Text(title)),
                   ),
                   body: Container(
