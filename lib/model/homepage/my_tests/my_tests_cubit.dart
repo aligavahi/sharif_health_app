@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:intl/intl.dart';
 import 'package:meta/meta.dart';
 import 'package:shamsi_date/shamsi_date.dart';
@@ -21,4 +22,20 @@ class MyTestsCubit extends Cubit<MyTestsState> {
     emit(MyTestsDataReady(tests: state.tests));
   }
 
+  goHistory(item) {
+    if (state is MyTestsSeeDetail) {
+      emit(MyTestsSeeHistory(
+          name: item,
+          tests: state.tests,
+          dataIndex: (state as MyTestsSeeDetail).dataIndex));
+    }
+  }
+
+  goBackDetail() {
+    if (state is MyTestsSeeHistory) {
+      emit(MyTestsSeeDetail(
+          tests: state.tests,
+          dataIndex: (state as MyTestsSeeHistory).dataIndex));
+    }
+  }
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sharif_health_app/model/homepage/my_tests/my_tests_cubit.dart';
+import 'package:sharif_health_app/ui/homepage/my_tests/history_section.dart';
 import 'package:sharif_health_app/ui/homepage/my_tests/test_summary_section.dart';
 import 'package:sharif_health_app/ui/homepage/my_tests/test_unit.dart';
 import 'package:sharif_health_app/utils/app_colors.dart';
@@ -40,7 +41,7 @@ class MyTestsPage extends StatelessWidget {
               return Scaffold(
                   appBar: AppBar(
                     automaticallyImplyLeading: false,
-                    title: Center(child:Text(title)),
+                    title: Center(child: Text(title)),
                   ),
                   body: Container(
                     color: AppColors.background,
@@ -48,6 +49,8 @@ class MyTestsPage extends StatelessWidget {
                         const EdgeInsets.only(left: 12, right: 10, bottom: 12),
                     child: inner,
                   ));
+            } else if (state is MyTestsSeeHistory) {
+              return getHistorySection(state.name, state.getHistoryData());
             } else if (state is MyTestsSeeDetail) {
               return getDetailSection(state.tests[state.dataIndex], context);
             }
@@ -100,5 +103,9 @@ class MyTestsPage extends StatelessWidget {
 
   Widget getDetailSection(DeviceData test, BuildContext context) {
     return TestSummarySection(data: test);
+  }
+
+  Widget getHistorySection(String name, List<Map> historyData) {
+    return HistorySection(name: name, data: historyData);
   }
 }

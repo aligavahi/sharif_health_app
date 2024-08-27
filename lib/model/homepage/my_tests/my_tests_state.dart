@@ -118,8 +118,7 @@ class DeviceData {
   }
 
   DeviceData(
-      {
-      required this.center,
+      {required this.center,
       required this.device_model,
       required this.load_dt,
       required this.date,
@@ -171,6 +170,115 @@ class DeviceData {
       required this.upper_muscle_m,
       required this.muscle_physique_rating,
       required this.physique_rating});
+
+  dynamic getAttribute(name) {
+    switch (name) {
+      case 'device_model':
+        return device_model;
+      case 'load_dt':
+        return load_dt;
+      case 'date':
+        return date;
+      case 'time':
+        return time;
+      case 'gender':
+        return gender;
+      case 'age':
+        return age;
+      case 'height':
+        return height;
+      case 'active_level':
+        return active_level;
+      case 'weight':
+        return weight;
+      case 'bmi':
+        return bmi;
+      case 'fat_percentage':
+        return fat_percentage;
+      case 'fat_right_arm_p':
+        return fat_right_arm_p;
+      case 'fat_left_arm_p':
+        return fat_left_arm_p;
+      case 'fat_right_leg_p':
+        return fat_right_leg_p;
+      case 'fat_left_leg_p':
+        return fat_left_leg_p;
+      case 'fat_trunk_p':
+        return fat_trunk_p;
+      case 'muscle_mass':
+        return muscle_mass;
+      case 'muscle_right_arm_m':
+        return muscle_right_arm_m;
+      case 'muscle_left_arm_m':
+        return muscle_left_arm_m;
+      case 'muscle_right_leg_m':
+        return muscle_right_leg_m;
+      case 'muscle_left_leg_m':
+        return muscle_left_leg_m;
+      case 'muscle_trunk_m':
+        return muscle_trunk_m;
+      case 'bone_mass':
+        return bone_mass;
+      case 'visceral_fat_rating':
+        return visceral_fat_rating;
+      case 'bmr':
+        return bmr;
+      case 'metabolic_age':
+        return metabolic_age;
+      case 'total_water_percentage':
+        return total_water_percentage;
+      case 'total_water_weight':
+        return total_water_weight;
+      case 'fat_mass':
+        return fat_mass;
+      case 'ffm':
+        return ffm;
+      case 'fat_right_leg_m':
+        return fat_right_leg_m;
+      case 'fat_left_leg_m':
+        return fat_left_leg_m;
+      case 'fat_right_arm_m':
+        return fat_right_arm_m;
+      case 'fat_left_arm_m':
+        return fat_left_arm_m;
+      case 'fat_trunk_m':
+        return fat_trunk_m;
+      case 'smm':
+        return smm;
+      case 'lower_weight':
+        return lower_weight;
+      case 'upper_weight':
+        return upper_weight;
+      case 'lower_bmi':
+        return lower_bmi;
+      case 'upper_bmi':
+        return upper_bmi;
+      case 'lower_fat_p':
+        return lower_fat_p;
+      case 'upper_fat_p':
+        return upper_fat_p;
+      case 'lower_fat_m':
+        return lower_fat_m;
+      case 'upper_fat_m':
+        return upper_fat_m;
+      case 'lower_ffm':
+        return lower_ffm;
+      case 'upper_ffm':
+        return upper_ffm;
+      case 'fat_physique_rating':
+        return fat_physique_rating;
+      case 'lower_muscle_m':
+        return lower_muscle_m;
+      case 'upper_muscle_m':
+        return upper_muscle_m;
+      case 'muscle_physique_rating':
+        return muscle_physique_rating;
+      case 'physique_rating':
+        return physique_rating;
+      case 'center':
+        return this.center;
+    }
+  }
 
   static List<DeviceData> fromListOfDict(List<Map> data) {
     return List<DeviceData>.generate(
@@ -250,4 +358,18 @@ final class MyTestsSeeDetail extends MyTestsState {
   final int dataIndex;
 
   const MyTestsSeeDetail({required super.tests, required this.dataIndex});
+}
+
+final class MyTestsSeeHistory extends MyTestsSeeDetail {
+  final String name;
+
+  const MyTestsSeeHistory(
+      {required super.tests, required super.dataIndex, required this.name});
+
+  List<Map> getHistoryData() {
+    return tests
+        .map<Map>((DeviceData test) =>
+            {"x": test.getHijriFormatDate(), "y": test.getAttribute(name)})
+        .toList();
+  }
 }
