@@ -7,7 +7,7 @@ class StorageModel {
 }
 
 class Storage {
-  static RunEnvironment runEnvironment = RunEnvironment.dev;
+  static RunEnvironment runEnvironment = RunEnvironment.prod;
   static const String _tokenKey = 'token';
   static const String _userDataKey = 'user_data';
   static StorageModel model = StorageModel();
