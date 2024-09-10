@@ -24,9 +24,9 @@ class Storage {
 
   static loadToken() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    if (runEnvironment == RunEnvironment.dev){
-      model.token = '92b0757b9220a5b02ecd57e71246bfe4';
-    }else {
+    if (runEnvironment == RunEnvironment.dev) {
+      model.token = 'ac04cf6907f40ddd7200f4b8522a4a11';
+    } else {
       model.token = prefs.getString(_tokenKey) ?? '';
     }
   }
@@ -46,11 +46,11 @@ class Storage {
     return jsonDecode(userDataString);
   }
 
-  static Future<void> clear() async{
+  static Future<void> clear() async {
     await clearToken();
   }
 
-  static Future<void> clearToken() async{
+  static Future<void> clearToken() async {
     model.token = "";
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.remove(_tokenKey);
