@@ -6,7 +6,6 @@ import 'package:sharif_health_app/ui/homepage/my_tests/my_tests_page.dart';
 import 'package:sharif_health_app/ui/homepage/navigation/navigation_item.dart';
 import 'package:sharif_health_app/ui/homepage/profile/main_page/profile_page.dart';
 import 'package:sharif_health_app/utils/app_colors.dart';
-import 'package:sharif_health_app/utils/app_item.dart';
 
 class TraineeHomePage extends StatelessWidget {
   const TraineeHomePage({super.key, required this.index});
@@ -23,24 +22,22 @@ class TraineeHomePage extends StatelessWidget {
         buttonBackgroundColor: AppColors.green  ,
         items: [
           NavigationItem(
-            icon: getNavigationItem("assets/trainee/profile.png", index == 0),
+            assetName:"assets/trainee/profile.png",
             label: 'پروفایل',
             isActive: index == 0,
           ),
           NavigationItem(
-            icon:
-            getNavigationItem("assets/trainee/diet.png", index == 1),
+            assetName:"assets/trainee/diet.png",
             label: 'برنامه غذایی',
             isActive: index == 1,
           ),
           NavigationItem(
-            icon:
-            getNavigationItem("assets/trainee/test.png", index == 2),
+            assetName:"assets/trainee/test.png",
             label: 'تست های من',
             isActive: index == 2,
           ),
           NavigationItem(
-            icon: getNavigationItem("assets/trainee/home.png", index == 3),
+            assetName: "assets/trainee/home.png",
             label: 'خانه',
             isActive: index == 3,
           )
