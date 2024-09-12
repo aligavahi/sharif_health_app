@@ -124,7 +124,11 @@ class ProfilePage extends StatelessWidget {
             roles.length,
             (index) => DropdownMenuEntry<String>(
                 value: roles[index].name, label: roles[index].displayTitle)),
-        onSelected: (val) {},
+        onSelected: (val) {
+          if (val != null) {
+            BlocProvider.of<HomepageCubit>(context).changeRole(val.parseRole);
+          }
+        },
         initialSelection:
             BlocProvider.of<HomepageCubit>(context).state.selectedRole.name,
       ),

@@ -28,17 +28,17 @@ class AdminHomePage extends StatelessWidget {
           ),
           NavigationItem(
             icon: ImageIcon(AssetImage("assets/navigation/diet.png")),
-            label: 'برنامه غذایی',
+            label: 'کاربران من',
             isActive: index == 1,
           ),
           NavigationItem(
             icon: ImageIcon(AssetImage("assets/navigation/test.png")),
-            label: 'تست های من',
+            label: 'دستگاه های من',
             isActive: index == 2,
           ),
           NavigationItem(
             icon: ImageIcon(AssetImage("assets/navigation/home.png")),
-            label: 'خانه',
+            label: 'مربی های من',
             isActive: index == 3,
           )
         ],

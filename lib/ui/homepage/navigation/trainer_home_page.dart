@@ -28,17 +28,17 @@ class TrainerHomePage extends StatelessWidget {
           ),
           NavigationItem(
             icon: ImageIcon(AssetImage("assets/navigation/diet.png")),
-            label: 'برنامه غذایی',
+            label: 'شاگردان من',
             isActive: index == 1,
           ),
           NavigationItem(
             icon: ImageIcon(AssetImage("assets/navigation/test.png")),
-            label: 'تست های من',
+            label: 'شاگردان باشگاه',
             isActive: index == 2,
           ),
           NavigationItem(
             icon: ImageIcon(AssetImage("assets/navigation/home.png")),
-            label: 'خانه',
+            label: 'باشگاه ها',
             isActive: index == 3,
           )
         ],
