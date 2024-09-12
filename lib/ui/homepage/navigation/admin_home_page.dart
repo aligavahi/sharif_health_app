@@ -6,6 +6,7 @@ import 'package:sharif_health_app/ui/homepage/my_tests/my_tests_page.dart';
 import 'package:sharif_health_app/ui/homepage/navigation/navigation_item.dart';
 import 'package:sharif_health_app/ui/homepage/profile/main_page/profile_page.dart';
 import 'package:sharif_health_app/utils/app_colors.dart';
+import 'package:sharif_health_app/utils/app_item.dart';
 
 class AdminHomePage extends StatelessWidget {
   const AdminHomePage({super.key, required this.index});
@@ -22,23 +23,25 @@ class AdminHomePage extends StatelessWidget {
         buttonBackgroundColor: AppColors.green,
         items: [
           NavigationItem(
-            icon: ImageIcon(AssetImage("assets/navigation/profile.png")),
+            icon: getNavigationItem("assets/admin/profile.png", index == 0),
             label: 'پروفایل',
             isActive: index == 0,
           ),
           NavigationItem(
-            icon: ImageIcon(AssetImage("assets/navigation/diet.png")),
+            icon:
+            getNavigationItem("assets/admin/my_users.png", index == 1),
             label: 'کاربران من',
             isActive: index == 1,
           ),
           NavigationItem(
-            icon: ImageIcon(AssetImage("assets/navigation/test.png")),
+            icon:
+            getNavigationItem("assets/admin/my_devices.png", index == 2),
             label: 'دستگاه های من',
             isActive: index == 2,
           ),
           NavigationItem(
-            icon: ImageIcon(AssetImage("assets/navigation/home.png")),
-            label: 'مربی های من',
+            icon: getNavigationItem("assets/admin/my_trainers.png", index == 3),
+            label: 'مربیان من',
             isActive: index == 3,
           )
         ],

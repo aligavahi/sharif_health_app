@@ -6,6 +6,7 @@ import 'package:sharif_health_app/ui/homepage/my_tests/my_tests_page.dart';
 import 'package:sharif_health_app/ui/homepage/navigation/navigation_item.dart';
 import 'package:sharif_health_app/ui/homepage/profile/main_page/profile_page.dart';
 import 'package:sharif_health_app/utils/app_colors.dart';
+import 'package:sharif_health_app/utils/app_item.dart';
 
 class TrainerHomePage extends StatelessWidget {
   const TrainerHomePage({super.key, required this.index});
@@ -19,25 +20,27 @@ class TrainerHomePage extends StatelessWidget {
       bottomNavigationBar: CurvedNavigationBar(
         backgroundColor: AppColors.background,
         color: AppColors.white,
-        buttonBackgroundColor: AppColors.green  ,
+        buttonBackgroundColor: AppColors.green,
         items: [
           NavigationItem(
-            icon: ImageIcon(AssetImage("assets/navigation/profile.png")),
+            icon: getNavigationItem("assets/trainer/profile.png", index == 0),
             label: 'پروفایل',
             isActive: index == 0,
           ),
           NavigationItem(
-            icon: ImageIcon(AssetImage("assets/navigation/diet.png")),
+            icon:
+                getNavigationItem("assets/trainer/my_trainee.png", index == 1),
             label: 'شاگردان من',
             isActive: index == 1,
           ),
           NavigationItem(
-            icon: ImageIcon(AssetImage("assets/navigation/test.png")),
+            icon:
+                getNavigationItem("assets/trainer/gym_trainee.png", index == 2),
             label: 'شاگردان باشگاه',
             isActive: index == 2,
           ),
           NavigationItem(
-            icon: ImageIcon(AssetImage("assets/navigation/home.png")),
+            icon: getNavigationItem("assets/trainer/gyms.png", index == 3),
             label: 'باشگاه ها',
             isActive: index == 3,
           )

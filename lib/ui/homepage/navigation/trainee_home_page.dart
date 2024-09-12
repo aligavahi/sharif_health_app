@@ -6,6 +6,7 @@ import 'package:sharif_health_app/ui/homepage/my_tests/my_tests_page.dart';
 import 'package:sharif_health_app/ui/homepage/navigation/navigation_item.dart';
 import 'package:sharif_health_app/ui/homepage/profile/main_page/profile_page.dart';
 import 'package:sharif_health_app/utils/app_colors.dart';
+import 'package:sharif_health_app/utils/app_item.dart';
 
 class TraineeHomePage extends StatelessWidget {
   const TraineeHomePage({super.key, required this.index});
@@ -22,22 +23,24 @@ class TraineeHomePage extends StatelessWidget {
         buttonBackgroundColor: AppColors.green  ,
         items: [
           NavigationItem(
-            icon: ImageIcon(AssetImage("assets/navigation/profile.png")),
+            icon: getNavigationItem("assets/trainee/profile.png", index == 0),
             label: 'پروفایل',
             isActive: index == 0,
           ),
           NavigationItem(
-            icon: ImageIcon(AssetImage("assets/navigation/diet.png")),
+            icon:
+            getNavigationItem("assets/trainee/diet.png", index == 1),
             label: 'برنامه غذایی',
             isActive: index == 1,
           ),
           NavigationItem(
-            icon: ImageIcon(AssetImage("assets/navigation/test.png")),
+            icon:
+            getNavigationItem("assets/trainee/test.png", index == 2),
             label: 'تست های من',
             isActive: index == 2,
           ),
           NavigationItem(
-            icon: ImageIcon(AssetImage("assets/navigation/home.png")),
+            icon: getNavigationItem("assets/trainee/home.png", index == 3),
             label: 'خانه',
             isActive: index == 3,
           )
