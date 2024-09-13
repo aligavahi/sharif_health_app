@@ -21,12 +21,15 @@ class DeviceCenterData {
 }
 
 @immutable
-sealed class MyDevicesState {}
-
-final class MyDevicesInitial extends MyDevicesState {
+sealed class MyDevicesState {
   final List<DeviceCenterData> devices;
-
   final int selected;
 
-  MyDevicesInitial({required this.devices, required this.selected});
+  const MyDevicesState({required this.devices, required this.selected});
+}
+
+final class MyDevicesInitial extends MyDevicesState {
+
+
+  MyDevicesInitial({required super.devices, required super.selected});
 }

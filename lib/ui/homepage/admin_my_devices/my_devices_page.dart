@@ -16,20 +16,22 @@ class MyDevicesPage extends StatelessWidget {
               return Scaffold(
                 backgroundColor: AppColors.background,
                 appBar: AppBar(
-                  title: Center(
+                  title: const Center(
                     child: Text("دستگاه های من"),
                   ),
                 ),
-                body: getDevicesView(state),
+                body: getDevicesView(state, context),
               );
             }));
   }
 
-  getDevicesView(MyDevicesState state) {
+  getDevicesView(MyDevicesState state, context) {
     if (state is MyDevicesInitial) {
       return ListView(
-        children: List<Widget>.generate(state.devices.length,
-            (index) => getDeviceItem(state.devices[index], state.selected)),
+        children: List<Widget>.generate(
+            state.devices.length,
+            (index) => getDeviceItem(
+                state.devices[index], index, index == state.selected, context)),
       );
     }
     return const Center(
@@ -37,31 +39,57 @@ class MyDevicesPage extends StatelessWidget {
             Text("شما هنوز هیچ دستگاهی ندارید. لطفا با پشنیبانی تماس بگیرید"));
   }
 
-  Widget getDeviceItem(DeviceCenterData device, int selected) {
-    return SizedBox(
-      height: 100,
-      child: ListTile(
-        tileColor: AppColors.white,
-        leading: const InkWell(
-          child: Icon(Icons.more_vert),
+  Widget getDeviceItem(
+      DeviceCenterData device, int index, bool selected, context) {
+    return Container(
+        decoration: BoxDecoration(
+          borderRadius: const BorderRadius.all(Radius.circular(10)),
+          color: selected ? AppColors.green : AppColors.white,
         ),
-        title: Text(
-          device.name,
-          textAlign: TextAlign.right,
-          style: const TextStyle(fontWeight: FontWeight.bold),
-        ),
-        subtitle: Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            Text(
-              device.deviceId,
-              textAlign: TextAlign.right,
+        margin: const EdgeInsets.all(10),
+        height: 80,
+        child: Center(
+          child: InkWell(
+            borderRadius: BorderRadius.all(Radius.circular(20)),
+            onTap: () {
+              BlocProvider.of<MyDevicesCubit>(context).selectDevice(index);
+            },
+            child: ListTile(
+              leading: const InkWell(
+                child: Icon(Icons.more_vert),
+              ),
+              title: Text(
+                device.name,
+                textAlign: TextAlign.right,
+                style: const TextStyle(fontWeight: FontWeight.bold),
+              ),
+              subtitle: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Text(
+                    device.deviceId,
+                    textAlign: TextAlign.right,
+                  ),
+                  const Icon(
+                    Icons.lightbulb_circle_rounded,
+                    size: 15,
+                    color: AppColors.orange,
+                  )
+                ],
+              ),
+              trailing: Container(
+                  height: 50,
+                  width: 50,
+                  decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                    color: AppColors.lightShadow,
+                  ),
+                  child: Icon(
+                    Icons.bike_scooter,
+                    color: selected ? AppColors.white : AppColors.green,
+                  )),
             ),
-            const Icon(Icons.lightbulb_circle_rounded,size: 15,color: AppColors.orange,)
-          ],
-        ),
-        trailing: const Icon(Icons.bike_scooter),
-      ),
-    );
+          ),
+        ));
   }
 }
