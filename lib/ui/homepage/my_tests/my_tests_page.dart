@@ -25,8 +25,7 @@ class MyTestsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: BlocProvider<MyTestsCubit>(
+    return BlocProvider<MyTestsCubit>(
       create: (BuildContext context) => MyTestsCubit(),
       child: BlocConsumer<MyTestsCubit, MyTestsState>(
           listener: (context, state) {},
@@ -60,7 +59,7 @@ class MyTestsPage extends StatelessWidget {
               textDirection: TextDirection.rtl,
             ));
           }),
-    ));
+    );
   }
 
   Widget getFooterNote() {

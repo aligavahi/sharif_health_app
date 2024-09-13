@@ -141,4 +141,14 @@ class NetworkProvider {
       return [];
     }
   }
+
+  static Future<List<Map>> getAdminCenters() async {
+    Map data = await getData(urlListAdminCenters, {});
+    if (data.isNotEmpty) {
+      List<Map> roles = List<Map>.from(data['centers']);
+      return roles;
+    } else {
+      return [];
+    }
+  }
 }
