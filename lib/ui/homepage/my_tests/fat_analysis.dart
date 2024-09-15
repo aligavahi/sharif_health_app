@@ -70,7 +70,7 @@ class FatAnalysis extends StatelessWidget {
         'percentage': data.fat_left_leg_p
       }
     ];
-    final width = (MediaQuery.of(context).size.width - 30) / 2;
+    final width = 250; // (MediaQuery.of(context).size.width - 30) / 2;
     Widget finalListCard;
     Widget finalListContainer;
     List<Widget> typeCardItems = List<Widget>.generate(
