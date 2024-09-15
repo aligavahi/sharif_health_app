@@ -95,11 +95,11 @@ class MuscleAnalysis extends StatelessWidget {
     finalListCard = SizedBox(
       height: (width + 5) * .33 * 4 + 50,
       child: ListView.builder(
-        padding: EdgeInsets.all(20),
+        padding: const EdgeInsets.all(20),
         itemCount: typeCardItems.length,
         itemBuilder: (context, index) {
           return Padding(
-            padding: EdgeInsets.only(bottom: 8),
+            padding: const EdgeInsets.only(bottom: 8),
             child: typeCardItems[index],
           );
         },
@@ -108,7 +108,7 @@ class MuscleAnalysis extends StatelessWidget {
 
     finalListContainer = SizedBox(
       child: GridView.count(
-          padding: EdgeInsets.all(20),
+          padding: const EdgeInsets.all(20),
           childAspectRatio: 1,
           controller: ScrollController(keepScrollOffset: false),
           shrinkWrap: true,
@@ -133,63 +133,61 @@ class MuscleAnalysis extends StatelessWidget {
             BlocProvider.of<MyTestsCubit>(context).goHistory(item['id']),
         child: Card(
           color: AppColors.white,
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Center(
-              child: ListTile(
-                leading: Stack(children: [
-                  Container(
-                    width: 100,
-                    height: 80,
-                    decoration: BoxDecoration(
-                      color: Color.fromARGB(255, 92, 238, 8),
-                      borderRadius: BorderRadius.circular(10),
-                      boxShadow: [
-                        BoxShadow(
-                            blurRadius: 10,
-                            color: AppColors.shadow,
-                            spreadRadius: 2)
-                      ],
-                    ),
-                    child: Text(
-                      "${item['value']} ${item['unit']}",
+          child: Center(
+            child: ListTile(
+              minTileHeight: 70,
+              minLeadingWidth: 100,
+              minVerticalPadding: 8,
+              leading: Column(
+                children: [
+                  Text("${item['value']}",
                       textDirection: TextDirection.rtl,
                       textAlign: TextAlign.right,
-                    ),
-                  ),
-                ]),
-                title: Text(
-                  item['name'],
+                      style: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      )),
+                  Text("${item['unit']}",
+                      textDirection: TextDirection.rtl,
+                      textAlign: TextAlign.right,
+                      style: const TextStyle(
+                        fontSize: 14,
+                      )),
+                ],
+              ),
+              title: Text(item['name'],
                   textAlign: TextAlign.right,
+                  style: const TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.shadow)),
+              trailing: Container(
+                decoration: const BoxDecoration(
+                  color: AppColors.white,
+                  shape: BoxShape.circle,
+                  boxShadow: [
+                    BoxShadow(
+                        blurRadius: 5,
+                        color: Color.fromARGB(255, 250, 247, 247),
+                        spreadRadius: 3)
+                  ],
                 ),
-                trailing: Container(
-                  decoration: const BoxDecoration(
-                    color: AppColors.white,
-                    shape: BoxShape.circle,
+                child: Container(
+                  width: 60,
+                  height: 80,
+                  decoration: BoxDecoration(
+                    color: AppColors.background,
+                    borderRadius: BorderRadius.circular(10),
                     boxShadow: [
-                      BoxShadow(
-                          blurRadius: 5,
-                          color: AppColors.shadow,
-                          spreadRadius: 3)
+                      const BoxShadow(
+                          blurRadius: 10,
+                          color: Color.fromRGBO(255, 255, 255, 1),
+                          spreadRadius: 2)
                     ],
                   ),
-                  child: Container(
-                    width: 60,
-                    height: 60,
-                    decoration: BoxDecoration(
-                      color: AppColors.background,
-                      borderRadius: BorderRadius.circular(10),
-                      boxShadow: [
-                        BoxShadow(
-                            blurRadius: 10,
-                            color: AppColors.shadow,
-                            spreadRadius: 2)
-                      ],
-                    ),
-                    child: Padding(
-                        padding: EdgeInsets.all(5),
-                        child: Image.asset("assets/mytests/${item['icon']}")),
-                  ),
+                  child: Padding(
+                      padding: const EdgeInsets.all(5),
+                      child: Image.asset("assets/mytests/${item['icon']}")),
                 ),
               ),
             ),
@@ -199,7 +197,7 @@ class MuscleAnalysis extends StatelessWidget {
 
   Widget typeContainer(BuildContext context, Map<String, dynamic> item) {
     return Container(
-      padding: EdgeInsets.only(top: 30),
+      padding: const EdgeInsets.only(top: 30),
       margin: EdgeInsets.zero,
       decoration: BoxDecoration(
         image: DecorationImage(
@@ -209,28 +207,50 @@ class MuscleAnalysis extends StatelessWidget {
       ),
       child: InkWell(
         child: ListTile(
-          subtitle: Text(
-            "${item['value']} ${item['unit']}",
-            textDirection: TextDirection.rtl,
-            textAlign: TextAlign.right,
-            style: TextStyle(fontSize: 16),
+          contentPadding:
+              const EdgeInsets.only(right: 16, left: 16, bottom: 16),
+          title: Align(
+            alignment: Alignment.topCenter,
+            child: Column(
+              children: [
+                Text(
+                  item['name'],
+                  textAlign: TextAlign.right,
+                  style: const TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.white),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "${item['unit']}",
+                      textDirection: TextDirection.rtl,
+                      textAlign: TextAlign.right,
+                      style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.normal,
+                          color: AppColors.white),
+                    ),
+                    const SizedBox(width: 5),
+                    Text(
+                      "${item['value']}",
+                      textDirection: TextDirection.rtl,
+                      textAlign: TextAlign.right,
+                      style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          color: AppColors.white),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
-          title: Text(
-            item['name'],
-            textAlign: TextAlign.right,
-            style: TextStyle(fontSize: 18),
-          ),
-          // trailing: Container(
-          //   width: 60,
-          //   height: 60,
-          //   margin: const EdgeInsets.only(right: 10),
-          //   decoration: const BoxDecoration(
-          //     borderRadius: BorderRadius.all(Radius.circular(10)),
-          //     color: Color.fromRGBO(250, 250, 250, .3),
-          //     shape: BoxShape.rectangle,
-          //   ),
-          //   child: Image.asset("assets/mytests/${item['icon']}"),
-          // ),
         ),
         onTap: () =>
             BlocProvider.of<MyTestsCubit>(context).goHistory(item['id']),
