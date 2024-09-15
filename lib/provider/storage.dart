@@ -4,16 +4,41 @@ import 'package:sharif_health_app/utils/env.dart';
 
 class StorageModel {
   String token = "";
+  int selectedDevice = 0;
 }
 
 class Storage {
   static RunEnvironment runEnvironment = RunEnvironment.dev;
   static const String _tokenKey = 'token';
   static const String _userDataKey = 'user_data';
+  static const String _selectedDeviceKey = 'selectedDevice';
   static StorageModel model = StorageModel();
 
   static loadStorage() async {
     await loadToken();
+    await loadSelectedDevice();
+  }
+
+  static Future<void> clear() async {
+    await clearToken();
+    await clearSelectedDevice();
+  }
+
+  static Future<void> saveUserData(Map<String, dynamic> userData) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString(_userDataKey, jsonEncode(userData));
+  }
+
+  static Future<Map<String, dynamic>> getUserData() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String userDataString = prefs.getString(_userDataKey) ?? '';
+    return jsonDecode(userDataString);
+  }
+
+  static Future<void> clearToken() async {
+    model.token = "";
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.remove(_tokenKey);
   }
 
   static Future<void> saveToken(String token) async {
@@ -35,24 +60,22 @@ class Storage {
     return model.token;
   }
 
-  static Future<void> saveUserData(Map<String, dynamic> userData) async {
+  static clearSelectedDevice() async {
+    model.selectedDevice = 0;
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setString(_userDataKey, jsonEncode(userData));
+    await prefs.remove(_selectedDeviceKey);
   }
 
-  static Future<Map<String, dynamic>> getUserData() async {
+  static loadSelectedDevice() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    String userDataString = prefs.getString(_userDataKey) ?? '';
-    return jsonDecode(userDataString);
+    model.selectedDevice = prefs.getInt(_selectedDeviceKey) ?? 0;
   }
 
-  static Future<void> clear() async {
-    await clearToken();
+  static int getSelectedDevice() {
+    return model.selectedDevice;
   }
 
-  static Future<void> clearToken() async {
-    model.token = "";
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.remove(_tokenKey);
+  static void saveSelectedDevice(int index) {
+    model.selectedDevice = index;
   }
 }

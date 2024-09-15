@@ -151,4 +151,25 @@ class NetworkProvider {
       return [];
     }
   }
+
+  static Future<List<Map>> getAdminTrainers(String device_id) async {
+    Map data = await getData(urlListAdminTrainers, {"device_id": device_id});
+    if (data.isNotEmpty) {
+      List<Map> trainers = List<Map>.from(data['trainers']);
+      return trainers;
+    } else {
+      return [];
+    }
+  }
+
+  static Future<List<Map>> getAdminUsers(String device_id) async{
+    Map data = await getData(urlListAdminTrainees, {"device_id": device_id});
+    if (data.isNotEmpty) {
+      print(data);
+      List<Map> trainers = List<Map>.from(data['trainees']);
+      return trainers;
+    } else {
+      return [];
+    }
+  }
 }
