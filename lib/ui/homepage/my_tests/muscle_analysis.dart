@@ -14,7 +14,6 @@ class MuscleAnalysis extends StatelessWidget {
         'name': 'وزن کل عضلات',
         'unit': 'کیلوگرم',
         'icon': 'icon_muscle_mass.png',
-        'image': 'image_muscle_mass.png',
         'value': data.muscle_mass,
         'percentage': '',
         'id': 'muscle_mass'
@@ -23,7 +22,6 @@ class MuscleAnalysis extends StatelessWidget {
         'name': 'وزن عضلات اسکلتی',
         'unit': 'کیلوگرم',
         'icon': 'icon_muscle_smm.png',
-        'image': 'image_muscle_smm.png',
         'value': data.smm,
         'percentage': '',
         'id': 'smm'
@@ -32,7 +30,6 @@ class MuscleAnalysis extends StatelessWidget {
         'name': 'وزن استخوان ها',
         'unit': 'کیلوگرم',
         'icon': 'icon_muscle_bone_mass.png',
-        'image': 'image_muscle_bone_mass.png',
         'value': data.bone_mass,
         'percentage': '',
         'id': 'bone_mass'
@@ -41,7 +38,6 @@ class MuscleAnalysis extends StatelessWidget {
         'name': 'عضلات نیم تنه بالایی',
         'unit': 'کیلوگرم',
         'icon': 'icon_muscle_trunk_mass.png',
-        'image': 'image_muscle_trunk_mass.png',
         'value': data.muscle_trunk_m,
         'percentage': '',
         'id': 'muscle_trunk_m'
@@ -133,61 +129,83 @@ class MuscleAnalysis extends StatelessWidget {
             BlocProvider.of<MyTestsCubit>(context).goHistory(item['id']),
         child: Card(
           color: AppColors.white,
-          child: Center(
-            child: ListTile(
-              minTileHeight: 70,
-              minLeadingWidth: 100,
-              minVerticalPadding: 8,
-              leading: Column(
-                children: [
-                  Text("${item['value']}",
-                      textDirection: TextDirection.rtl,
-                      textAlign: TextAlign.right,
-                      style: const TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      )),
-                  Text("${item['unit']}",
-                      textDirection: TextDirection.rtl,
-                      textAlign: TextAlign.right,
-                      style: const TextStyle(
-                        fontSize: 14,
-                      )),
-                ],
-              ),
-              title: Text(item['name'],
-                  textAlign: TextAlign.right,
-                  style: const TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      color: AppColors.shadow)),
-              trailing: Container(
-                decoration: const BoxDecoration(
-                  color: AppColors.white,
-                  shape: BoxShape.circle,
-                  boxShadow: [
-                    BoxShadow(
-                        blurRadius: 5,
-                        color: Color.fromARGB(255, 250, 247, 247),
-                        spreadRadius: 3)
-                  ],
-                ),
-                child: Container(
-                  width: 60,
-                  height: 80,
-                  decoration: BoxDecoration(
-                    color: AppColors.background,
-                    borderRadius: BorderRadius.circular(10),
-                    boxShadow: [
-                      const BoxShadow(
-                          blurRadius: 10,
-                          color: Color.fromRGBO(255, 255, 255, 1),
-                          spreadRadius: 2)
+          child: Container(
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage(
+                    "assets/mytests/cardtype_background.png",
+                  ),
+                  fit: BoxFit.fitHeight,
+                  alignment: Alignment.centerLeft),
+            ),
+            child: Center(
+              child: ListTile(
+                minTileHeight: 70,
+                minLeadingWidth: 100,
+                minVerticalPadding: 8,
+                leading: Container(
+                  width: 50,
+                  height: 50,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text(
+                        "${item['value']}",
+                        textDirection: TextDirection.rtl,
+                        textAlign: TextAlign.right,
+                        style: const TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: AppColors.white),
+                      ),
+                      if (item['unit'] != '')
+                        Text(
+                          "${item['unit']}",
+                          textDirection: TextDirection.rtl,
+                          textAlign: TextAlign.right,
+                          style: const TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.normal,
+                              color: AppColors.white),
+                        ),
                     ],
                   ),
-                  child: Padding(
-                      padding: const EdgeInsets.all(5),
-                      child: Image.asset("assets/mytests/${item['icon']}")),
+                ),
+                title: Text(item['name'],
+                    textAlign: TextAlign.right,
+                    style: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: AppColors.shadow)),
+                trailing: Container(
+                  decoration: const BoxDecoration(
+                    color: AppColors.white,
+                    shape: BoxShape.circle,
+                    boxShadow: [
+                      BoxShadow(
+                          blurRadius: 5,
+                          color: Color.fromARGB(255, 250, 247, 247),
+                          spreadRadius: 3)
+                    ],
+                  ),
+                  child: Container(
+                    width: 60,
+                    height: 80,
+                    decoration: BoxDecoration(
+                      color: AppColors.background,
+                      borderRadius: BorderRadius.circular(10),
+                      boxShadow: [
+                        const BoxShadow(
+                            blurRadius: 10,
+                            color: Color.fromRGBO(255, 255, 255, 1),
+                            spreadRadius: 2)
+                      ],
+                    ),
+                    child: Padding(
+                        padding: const EdgeInsets.all(5),
+                        child: Image.asset("assets/mytests/${item['icon']}")),
+                  ),
                 ),
               ),
             ),
