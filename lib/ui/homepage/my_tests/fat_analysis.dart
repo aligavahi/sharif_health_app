@@ -42,13 +42,6 @@ class FatAnalysis extends StatelessWidget {
     ];
     List<Map<String, dynamic>> typeContainerList = [
       {
-        'name': 'چربی دست راست',
-        'unit': 'کیلوگرم',
-        'image': 'image_muscle_right_arm.png',
-        'value': data.fat_right_arm_m,
-        'percentage': data.fat_right_arm_p
-      },
-      {
         'name': 'چربی دست چپ',
         'unit': 'کیلوگرم',
         'image': 'image_muscle_left_arm.png',
@@ -56,11 +49,11 @@ class FatAnalysis extends StatelessWidget {
         'percentage': data.fat_left_arm_p
       },
       {
-        'name': 'چربی پا راست',
+        'name': 'چربی دست راست',
         'unit': 'کیلوگرم',
-        'image': 'image_muscle_right_leg.png',
-        'value': data.fat_right_leg_m,
-        'percentage': data.fat_right_leg_p
+        'image': 'image_muscle_right_arm.png',
+        'value': data.fat_right_arm_m,
+        'percentage': data.fat_right_arm_p
       },
       {
         'name': 'چربی پا چپ',
@@ -68,6 +61,13 @@ class FatAnalysis extends StatelessWidget {
         'image': 'image_muscle_left_leg.png',
         'value': data.fat_left_leg_m,
         'percentage': data.fat_left_leg_p
+      },
+      {
+        'name': 'چربی پا راست',
+        'unit': 'کیلوگرم',
+        'image': 'image_muscle_right_leg.png',
+        'value': data.fat_right_leg_m,
+        'percentage': data.fat_right_leg_p
       }
     ];
     final width = 250; // (MediaQuery.of(context).size.width - 30) / 2;
