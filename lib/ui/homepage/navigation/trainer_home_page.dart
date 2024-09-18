@@ -2,10 +2,11 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sharif_health_app/model/homepage/homepage_cubit.dart';
-import 'package:sharif_health_app/ui/homepage/my_tests/my_tests_page.dart';
 import 'package:sharif_health_app/ui/homepage/navigation/navigation_item.dart';
 import 'package:sharif_health_app/ui/homepage/profile/main_page/profile_page.dart';
 import 'package:sharif_health_app/utils/app_colors.dart';
+
+import '../trainer_users/trainer_users_page.dart';
 
 class TrainerHomePage extends StatelessWidget {
   const TrainerHomePage({super.key, required this.index});
@@ -55,9 +56,9 @@ class TrainerHomePage extends StatelessWidget {
       case 0:
         return const ProfilePage();
       case 1:
-        break;
+        return const TrainerUsersPage();
       case 2:
-        return const MyTestsPage();
+        break;
       case 3:
         break;
     }

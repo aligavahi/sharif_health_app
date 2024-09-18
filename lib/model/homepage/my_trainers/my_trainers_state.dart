@@ -20,7 +20,7 @@ class Trainer {
     Trainer trainer = Trainer(
         firstName: item['first_name']??"",
         lastName: item['last_name']??"",
-        accountId: item['account_id']==""?-1:item['account_id'],
+        accountId: (item['account_id']=="")?-1:item['account_id'],
         phoneNumber: item['mobile_number']??"");
     return trainer;
   }
@@ -34,5 +34,5 @@ sealed class MyTrainersState {
 }
 
 final class MyTrainersInitial extends MyTrainersState {
-  MyTrainersInitial({required super.trainers});
+  const MyTrainersInitial({required super.trainers});
 }
