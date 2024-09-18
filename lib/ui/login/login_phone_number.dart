@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sharif_health_app/model/login/login_cubit.dart';
 import 'package:sharif_health_app/utils/app_colors.dart';
@@ -32,7 +33,7 @@ class LoginPhoneNumber extends StatelessWidget {
           50,
           MediaQuery.of(context).size.height * .45,
           50,
-          MediaQuery.of(context).size.height * .10,
+          MediaQuery.of(context).size.height * .07,
         ),
         padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
@@ -41,12 +42,14 @@ class LoginPhoneNumber extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            Container(
+            SizedBox(
               width: 51,
               height: 51,
               child: Image.asset("assets/page2/login_icon.png"),
             ),
-            SizedBox(height: 30,),
+            const SizedBox(
+              height: 30,
+            ),
             Container(
               alignment: Alignment.topRight,
               child: SizedBox(
@@ -61,8 +64,8 @@ class LoginPhoneNumber extends StatelessWidget {
                           style: const TextStyle(
                               fontSize: 24, fontWeight: FontWeight.bold),
                         ),
-                        SizedBox(
-                          height: 8,
+                        const SizedBox(
+                          height: 16,
                         ),
                         Text(
                           detail,
@@ -73,41 +76,47 @@ class LoginPhoneNumber extends StatelessWidget {
                         ),
                       ],
                     ),
-                    SizedBox(width: 5,),
-                    SizedBox(
-                        width: 5,
-                        height: 74,
-                        child: ColoredBox(color: AppColors.green)),
+                    const SizedBox(
+                      width: 5,
+                    ),
+                    Container(
+                      width: 5,
+                      height: 74,
+                      decoration: BoxDecoration(
+                        color: AppColors.green,
+                        borderRadius: BorderRadius.circular(2.5),
+                      ),
+                    ),
                   ],
                 ),
               ),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             const Spacer(),
-            Container(
-              padding: const EdgeInsets.only(left: 15, right: 15),
-              decoration: BoxDecoration(
-                  border: Border.all(),
-                  borderRadius: BorderRadius.circular(27.0)),
-              height: 57,
-              child: Row(children: [
-                Icon(Icons.phone_rounded),
-                Spacer(),
+
                 Expanded(
                   flex: 20,
-                  child: TextField(
-                      autofocus: true,
-                      keyboardType: TextInputType.phone,
-                      onChanged: (value) {
-                        BlocProvider.of<LoginCubit>(context)
-                            .updatePhoneNumber(value);
-                      },
-                      decoration: InputDecoration(border: InputBorder.none)),
-                )
-              ]),
-            ),
+                  child: TextFormField(
+                    showCursor: true,
+                    textAlign: TextAlign.left,
+                    textDirection: TextDirection.ltr,
+                    decoration: InputDecoration(
+                      labelText: "شماره همراه",
+                      contentPadding: const EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(22.0)),
+                      prefixIcon: const Icon(Icons.phone_rounded, color: AppColors.shadow),
+                      prefix: const Text("+98 ", textDirection: TextDirection.ltr),
+                    ),
+                    autofocus: true,
+                    keyboardType: TextInputType.phone,
+                    inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'[0-9]'))],
+                    onChanged: (value) {
+                      BlocProvider.of<LoginCubit>(context)
+                          .updatePhoneNumber(value);
+                    },
+                  ),
+                ),
             const Spacer(
-              flex: 2,
             ),
             Container(
               height: 54,
@@ -126,17 +135,23 @@ class LoginPhoneNumber extends StatelessWidget {
                   BlocProvider.of<LoginCubit>(context).sendSms();
                 },
                 child: SizedBox(
-                    width: double.infinity,
-                    height: 54,
-                    child: Center(
-                      child: Text(
-                          style: const TextStyle(color: Colors.white),
-                          buttonText),
+                  width: double.infinity,
+                  height: 54,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Icon(Icons.arrow_back,color: Colors.white,),
+                        const SizedBox(width: 8,),
+                        Text(
+                            style: const TextStyle(color: Colors.white,fontSize: 18,fontWeight: FontWeight.bold),
+                            buttonText),
+                      ],
                     ),
+                  )
                 ),
               ),
-            ),
+      
           ],
         ));
-  }
-}
+
+  }}
