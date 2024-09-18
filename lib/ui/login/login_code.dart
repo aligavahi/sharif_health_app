@@ -1,9 +1,11 @@
 import 'dart:async';
+import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pinput/pinput.dart';
 import 'package:sharif_health_app/model/login/login_cubit.dart';
+import 'package:sharif_health_app/utils/app_colors.dart';
 
 class LoginCode extends StatefulWidget {
   const LoginCode({super.key, required this.phoneNumber});
@@ -21,11 +23,11 @@ class _LoginCodeState extends State<LoginCode> {
 
   final String detail = "کد ارسالی به شماره {} را وارد کنید";
 
-  final String buttonTextOk1 = "ارسال پیامک";
+  final String buttonTextOk1 = "ارسال مجدد پیامک";
 
   final String buttonTextOk2 = " {} " "ثانیه تا ارسال مجدد";
 
-  final String buttonTextBack = "ویرایش شماره موبایل";
+  final String buttonTextBack = "ویرایش شماره همراه";
 
   _LoginCodeState() {
     startTimer();
@@ -36,62 +38,71 @@ class _LoginCodeState extends State<LoginCode> {
     return Container(
       decoration: const BoxDecoration(
         image: DecorationImage(
-          image: AssetImage("assets/6.png"),
-          fit: BoxFit.cover,
+          alignment: Alignment.topCenter,
+          fit: BoxFit.fitWidth,
+          image: AssetImage("assets/page3/code_input_top.png"),
         ),
       ),
       child: getForm(context),
     );
   }
+  
 
   Widget getForm(context) {
     final defaultPinTheme = PinTheme(
       width: 56,
       height: 56,
-      textStyle: TextStyle(
+      textStyle: const TextStyle(
           fontSize: 20,
-          color: Color.fromRGBO(30, 60, 87, 1),
+          color: Colors.black,
           fontWeight: FontWeight.w600),
       decoration: BoxDecoration(
-        color: Color.fromRGBO(200, 200, 200, 1),
-        border: Border.all(color: Color.fromRGBO(234, 239, 243, 1)),
-        borderRadius: BorderRadius.circular(20),
+        color: const Color.fromRGBO(246, 246, 246, 1),
+        border: Border.all(color: Color.fromARGB(237, 234, 239, 243)),
+        borderRadius: BorderRadius.circular(27),
       ),
     );
 
     final focusedPinTheme = defaultPinTheme.copyDecorationWith(
-      border: Border.all(color: Color.fromRGBO(114, 178, 238, 1)),
-      borderRadius: BorderRadius.circular(8),
+      border: Border.all(color: Color.fromARGB(136, 253, 132, 11)),
+      borderRadius: BorderRadius.circular(27),
     );
 
     final submittedPinTheme = defaultPinTheme.copyDecorationWith(
-      color: Color.fromRGBO(234, 239, 243, 1),
+      color: const Color.fromRGBO(234, 239, 243, 1),
     );
 
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         SizedBox(
-          height: MediaQuery.of(context).size.height * .3,
-          child: Image.asset("assets/7.png"),
+         height: MediaQuery.of(context).size.height * .3,
         ),
+        SizedBox(
+          height: 95,
+          width: 101,
+          child: Image.asset("assets/page3/code_input_icon.png"),
+        ),
+        const SizedBox(height: 24,),
         SizedBox(
           height: 30,
           child: Text(
             title,
             style: const TextStyle(
-                fontWeight: FontWeight.bold, color: Colors.white),
+                fontWeight: FontWeight.bold, color: Colors.black, fontSize: 16),
           ),
         ),
+        const SizedBox(height: 24,),
         SizedBox(
           height: 30,
           child: Text(
             detail.replaceAll('{}', widget.phoneNumber),
-            style: const TextStyle(color: Colors.white),
+            style: const TextStyle(color: AppColors.shadow, fontSize: 14),
           ),
         ),
         Container(
-          height: 50 + 25,
-          padding: EdgeInsets.only(top: 5, bottom: 20),
+          height: 100,
+          padding: const EdgeInsets.only(top: 5, bottom: 20),
           child: Pinput(
             length: 4,
             defaultPinTheme: defaultPinTheme,
@@ -102,54 +113,51 @@ class _LoginCodeState extends State<LoginCode> {
             },
           ),
         ),
-        Container(
-          height: 50,
-          padding: EdgeInsets.only(
-              left: MediaQuery.of(context).size.width * .2,
-              right: MediaQuery.of(context).size.width * .2),
-          decoration: BoxDecoration(borderRadius: BorderRadius.circular(20.0)),
-          child: ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(0.0),
-              ),
-              padding: EdgeInsets.zero,
-              backgroundColor: Colors.transparent,
-            ),
-            onPressed: (retryTime > 0)
-                ? null
-                : () {
-                    BlocProvider.of<LoginCubit>(context).sendSms();
-                  },
-            child: Ink.image(
-              colorFilter: (retryTime > 0)
-                  ? const ColorFilter.mode(Colors.grey, BlendMode.darken)
-                  : null,
-              image: const AssetImage('assets/5.png'),
-              fit: BoxFit.cover,
-              child: Center(
-                child: Text(
-                    textDirection: TextDirection.rtl,
-                    style: const TextStyle(color: Colors.white),
-                    (retryTime > 0)
-                        ? buttonTextOk2.replaceAll('{}', retryTime.toString())
-                        : buttonTextOk1),
-              ),
-            ),
-          ),
-        ),
+        ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  minimumSize: const Size(288, 54),
+                  backgroundColor:
+                      (retryTime > 0) ? AppColors.shadow : AppColors.green,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(27.0),
+                  ),
+                  padding: EdgeInsets.zero,
+                  elevation: 4,
+                ),
+                onPressed: () {
+                  (retryTime > 0)
+                      ? confirmDialog(context, "توجه",
+                          "لطفا تا پایان زمان درخواست مجدد منتظر بمانید", [
+                          {'text': 'باشه'},
+                        ])
+                      : BlocProvider.of<LoginCubit>(context).sendSms();
+                },
+                child: SizedBox(
+                  width:max(150,MediaQuery.of(context).size.width * .3),
+                  height: 54,
+                  child: Center(
+                    child: Text(
+                        textDirection: TextDirection.rtl,
+                        style: const TextStyle(color: Colors.white),
+                        (retryTime > 0)
+                            ? buttonTextOk2.replaceAll(
+                                '{}', retryTime.toString())
+                            : buttonTextOk1),
+                  ),
+                )),
         SizedBox(
             height: 50,
-            width: 200,
             child: TextButton(
                 onPressed: () {
-                    BlocProvider.of<LoginCubit>(context).goPhoneNumber();
+                  BlocProvider.of<LoginCubit>(context).goPhoneNumber();
                 },
-                child: Row(children: [
-                  const Icon(Icons.arrow_back_ios),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                  const Icon(Icons.arrow_back_ios, color: Colors.red,size: 12,),
                   Text(
                     buttonTextBack,
-                    style: const TextStyle(color: Colors.red),
+                    style: const TextStyle(color: Colors.red,fontSize: 12),
                   ),
                 ])))
       ],
@@ -173,4 +181,31 @@ class _LoginCodeState extends State<LoginCode> {
       }
     });
   }
+}
+
+Future<bool?> confirmDialog(context, String title, String message,
+    List<Map<String, dynamic>> buttons) async {
+  return await showDialog<bool>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(title, textDirection: TextDirection.rtl),
+          content: SingleChildScrollView(
+            child: Column(
+              children: <Widget>[
+                Text(message),
+              ],
+            ),
+          ),
+          actions: buttons
+              .map((button) => TextButton(
+                    child: Text(button['text']),
+                    onPressed: () {
+                      Navigator.pop(context, button['value']);
+                    },
+                  ))
+              .toList(),
+        );
+      });
 }

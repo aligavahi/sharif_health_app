@@ -93,65 +93,74 @@ class LoginPhoneNumber extends StatelessWidget {
             ),
             const SizedBox(height: 10),
             const Spacer(),
-
-                Expanded(
-                  flex: 20,
-                  child: TextFormField(
-                    showCursor: true,
-                    textAlign: TextAlign.left,
-                    textDirection: TextDirection.ltr,
-                    decoration: InputDecoration(
-                      labelText: "شماره همراه",
-                      contentPadding: const EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(22.0)),
-                      prefixIcon: const Icon(Icons.phone_rounded, color: AppColors.shadow),
-                      prefix: const Text("+98 ", textDirection: TextDirection.ltr),
-                    ),
-                    autofocus: true,
-                    keyboardType: TextInputType.phone,
-                    inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'[0-9]'))],
-                    onChanged: (value) {
-                      BlocProvider.of<LoginCubit>(context)
-                          .updatePhoneNumber(value);
-                    },
-                  ),
+            Expanded(
+              flex: 20,
+              child: TextFormField(
+                showCursor: true,
+                textAlign: TextAlign.left,
+                textDirection: TextDirection.ltr,
+                decoration: InputDecoration(
+                  labelText: "شماره همراه",
+                  contentPadding:
+                      const EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(22.0)),
+                  prefixIcon:
+                      const Icon(Icons.phone_rounded, color: AppColors.shadow),
+                  prefix: const Text("+98 ", textDirection: TextDirection.ltr),
                 ),
-            const Spacer(
+                autofocus: true,
+                keyboardType: TextInputType.phone,
+                inputFormatters: [
+                  FilteringTextInputFormatter.allow(RegExp(r'[0-9]'))
+                ],
+                onChanged: (value) {
+                  BlocProvider.of<LoginCubit>(context).updatePhoneNumber(value);
+                },
+                onEditingComplete: () => FocusScope.of(context).nextFocus(),
+              ),
             ),
+            const Spacer(),
             Container(
               height: 54,
               decoration:
                   BoxDecoration(borderRadius: BorderRadius.circular(27.0)),
               child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.green,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(27.0),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: AppColors.green,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(27.0),
+                    ),
+                    padding: EdgeInsets.zero,
+                    elevation: 4,
                   ),
-                  padding: EdgeInsets.zero,
-                  elevation: 4,
-                ),
-                onPressed: () {
-                  BlocProvider.of<LoginCubit>(context).sendSms();
-                },
-                child: SizedBox(
-                  width: double.infinity,
-                  height: 54,
+                  onPressed: () {
+                    BlocProvider.of<LoginCubit>(context).sendSms();
+                  },
+                  child: SizedBox(
+                    width: double.infinity,
+                    height: 54,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const Icon(Icons.arrow_back,color: Colors.white,),
-                        const SizedBox(width: 8,),
+                        const Icon(
+                          Icons.arrow_back,
+                          color: Colors.white,
+                        ),
+                        const SizedBox(
+                          width: 8,
+                        ),
                         Text(
-                            style: const TextStyle(color: Colors.white,fontSize: 18,fontWeight: FontWeight.bold),
+                            style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold),
                             buttonText),
                       ],
                     ),
-                  )
-                ),
-              ),
-      
+                  )),
+            ),
           ],
         ));
-
-  }}
+  }
+}
