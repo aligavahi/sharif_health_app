@@ -4,35 +4,24 @@ import 'package:sharif_health_app/utils/env.dart';
 
 class StorageModel {
   String token = "";
+  int selectedDevice = 0;
 }
 
 class Storage {
-  static RunEnvironment runEnvironment = RunEnvironment.prod;
+  static RunEnvironment runEnvironment = RunEnvironment.dev;
   static const String _tokenKey = 'token';
   static const String _userDataKey = 'user_data';
+  static const String _selectedDeviceKey = 'selectedDevice';
   static StorageModel model = StorageModel();
 
   static loadStorage() async {
     await loadToken();
+    await loadSelectedDevice();
   }
 
-  static Future<void> saveToken(String token) async {
-    model.token = token;
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setString(_tokenKey, token);
-  }
-
-  static loadToken() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    if (runEnvironment == RunEnvironment.dev){
-      model.token = '92b0757b9220a5b02ecd57e71246bfe4';
-    }else {
-      model.token = prefs.getString(_tokenKey) ?? '';
-    }
-  }
-
-  static String getToken() {
-    return model.token;
+  static Future<void> clear() async {
+    await clearToken();
+    await clearSelectedDevice();
   }
 
   static Future<void> saveUserData(Map<String, dynamic> userData) async {
@@ -46,13 +35,47 @@ class Storage {
     return jsonDecode(userDataString);
   }
 
-  static Future<void> clear() async{
-    await clearToken();
-  }
-
-  static Future<void> clearToken() async{
+  static Future<void> clearToken() async {
     model.token = "";
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.remove(_tokenKey);
+  }
+
+  static Future<void> saveToken(String token) async {
+    model.token = token;
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString(_tokenKey, token);
+  }
+
+  static loadToken() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    if (runEnvironment == RunEnvironment.dev) {
+      model.token = 'ac04cf6907f40ddd7200f4b8522a4a11';
+    } else {
+      model.token = prefs.getString(_tokenKey) ?? '';
+    }
+  }
+
+  static String getToken() {
+    return model.token;
+  }
+
+  static clearSelectedDevice() async {
+    model.selectedDevice = 0;
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.remove(_selectedDeviceKey);
+  }
+
+  static loadSelectedDevice() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    model.selectedDevice = prefs.getInt(_selectedDeviceKey) ?? 0;
+  }
+
+  static int getSelectedDevice() {
+    return model.selectedDevice;
+  }
+
+  static void saveSelectedDevice(int index) {
+    model.selectedDevice = index;
   }
 }

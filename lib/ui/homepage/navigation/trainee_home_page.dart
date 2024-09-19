@@ -22,22 +22,22 @@ class TraineeHomePage extends StatelessWidget {
         buttonBackgroundColor: AppColors.green  ,
         items: [
           NavigationItem(
-            icon: ImageIcon(AssetImage("assets/navigation/profile.png")),
+            assetName:"assets/trainee/profile.png",
             label: 'پروفایل',
             isActive: index == 0,
           ),
           NavigationItem(
-            icon: ImageIcon(AssetImage("assets/navigation/diet.png")),
+            assetName:"assets/trainee/diet.png",
             label: 'برنامه غذایی',
             isActive: index == 1,
           ),
           NavigationItem(
-            icon: ImageIcon(AssetImage("assets/navigation/test.png")),
+            assetName:"assets/trainee/test.png",
             label: 'تست های من',
             isActive: index == 2,
           ),
           NavigationItem(
-            icon: ImageIcon(AssetImage("assets/navigation/home.png")),
+            assetName: "assets/trainee/home.png",
             label: 'خانه',
             isActive: index == 3,
           )

@@ -2,7 +2,9 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sharif_health_app/model/homepage/homepage_cubit.dart';
-import 'package:sharif_health_app/ui/homepage/my_tests/my_tests_page.dart';
+import 'package:sharif_health_app/ui/homepage/admin_my_devices/my_devices_page.dart';
+import 'package:sharif_health_app/ui/homepage/admin_my_trainers/my_trainers_page.dart';
+import 'package:sharif_health_app/ui/homepage/admin_my_users/admin_my_trainees_page.dart';
 import 'package:sharif_health_app/ui/homepage/navigation/navigation_item.dart';
 import 'package:sharif_health_app/ui/homepage/profile/main_page/profile_page.dart';
 import 'package:sharif_health_app/utils/app_colors.dart';
@@ -22,23 +24,23 @@ class AdminHomePage extends StatelessWidget {
         buttonBackgroundColor: AppColors.green,
         items: [
           NavigationItem(
-            icon: ImageIcon(AssetImage("assets/navigation/profile.png")),
+            assetName: "assets/admin/profile.png",
             label: 'پروفایل',
             isActive: index == 0,
           ),
           NavigationItem(
-            icon: ImageIcon(AssetImage("assets/navigation/diet.png")),
-            label: 'برنامه غذایی',
+            assetName: "assets/admin/my_users.png",
+            label: 'کاربران من',
             isActive: index == 1,
           ),
           NavigationItem(
-            icon: ImageIcon(AssetImage("assets/navigation/test.png")),
-            label: 'تست های من',
+            assetName: "assets/admin/my_devices.png",
+            label: 'دستگاه های من',
             isActive: index == 2,
           ),
           NavigationItem(
-            icon: ImageIcon(AssetImage("assets/navigation/home.png")),
-            label: 'خانه',
+            assetName: "assets/admin/my_trainers.png",
+            label: 'مربیان من',
             isActive: index == 3,
           )
         ],
@@ -55,11 +57,11 @@ class AdminHomePage extends StatelessWidget {
       case 0:
         return const ProfilePage();
       case 1:
-        break;
+        return const AdminMyTraineesPage();
       case 2:
-        return const MyTestsPage();
+        return const MyDevicesPage();
       case 3:
-        break;
+        return const MyTrainersPage();
     }
     return const Center(
       child: Text("coming soon"),

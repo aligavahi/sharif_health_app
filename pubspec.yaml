@@ -78,6 +78,7 @@ flutter:
     - assets/profile/
     - assets/page1/
     - assets/page2/
+    - assets/page3/
     - assets/admin/
     - assets/trainer/
     - assets/trainee/

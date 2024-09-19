@@ -2,10 +2,11 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sharif_health_app/model/homepage/homepage_cubit.dart';
-import 'package:sharif_health_app/ui/homepage/my_tests/my_tests_page.dart';
 import 'package:sharif_health_app/ui/homepage/navigation/navigation_item.dart';
 import 'package:sharif_health_app/ui/homepage/profile/main_page/profile_page.dart';
 import 'package:sharif_health_app/utils/app_colors.dart';
+
+import '../trainer_users/trainer_users_page.dart';
 
 class TrainerHomePage extends StatelessWidget {
   const TrainerHomePage({super.key, required this.index});
@@ -19,26 +20,26 @@ class TrainerHomePage extends StatelessWidget {
       bottomNavigationBar: CurvedNavigationBar(
         backgroundColor: AppColors.background,
         color: AppColors.white,
-        buttonBackgroundColor: AppColors.green  ,
+        buttonBackgroundColor: AppColors.green,
         items: [
           NavigationItem(
-            icon: ImageIcon(AssetImage("assets/navigation/profile.png")),
+            assetName:"assets/trainer/profile.png",
             label: 'پروفایل',
             isActive: index == 0,
           ),
           NavigationItem(
-            icon: ImageIcon(AssetImage("assets/navigation/diet.png")),
-            label: 'برنامه غذایی',
+            assetName:"assets/trainer/my_trainee.png",
+            label: 'شاگردان من',
             isActive: index == 1,
           ),
           NavigationItem(
-            icon: ImageIcon(AssetImage("assets/navigation/test.png")),
-            label: 'تست های من',
+            assetName:"assets/trainer/gym_trainee.png",
+            label: 'شاگردان باشگاه',
             isActive: index == 2,
           ),
           NavigationItem(
-            icon: ImageIcon(AssetImage("assets/navigation/home.png")),
-            label: 'خانه',
+            assetName: "assets/trainer/gyms.png",
+            label: 'باشگاه ها',
             isActive: index == 3,
           )
         ],
@@ -55,9 +56,9 @@ class TrainerHomePage extends StatelessWidget {
       case 0:
         return const ProfilePage();
       case 1:
-        break;
+        return const TrainerUsersPage();
       case 2:
-        return const MyTestsPage();
+        break;
       case 3:
         break;
     }
