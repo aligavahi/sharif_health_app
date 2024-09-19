@@ -182,4 +182,8 @@ class NetworkProvider {
       return [];
     }
   }
+  static Future<bool> submitPermission(Map<String, dynamic> data) async {
+    print(data);
+    return await postData(urlAddPermission, data);
+  }
 }

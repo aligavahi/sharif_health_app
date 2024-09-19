@@ -28,7 +28,6 @@ class TestUnit extends StatelessWidget {
                         image: AssetImage(
                           "assets/mytests/test_image.png",
                         ),
-                        colorFilter: ColorFilter.linearToSrgbGamma(),
                         fit: BoxFit.fitHeight,
                         alignment: Alignment.centerLeft),
                   ),

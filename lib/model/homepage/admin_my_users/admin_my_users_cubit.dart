@@ -16,4 +16,44 @@ class AdminMyUsersCubit extends Cubit<AdminMyUsersState> {
       });
     });
   }
+
+  goToDetailUser(userIndex) {
+    emit(AdminMyUsersSelectUser(selectedUser: userIndex, users: state.users));
+  }
+
+  goToPermissionDialog() {
+    if (state is AdminMyUsersSelectUser) {
+      emit(AdminMyUsersChangePermission(
+          testCount: 0,
+          expireDay: 0,
+          selectedUser: (state as AdminMyUsersSelectUser).selectedUser,
+          users: state.users));
+    }
+  }
+
+  editPermissionDialog({int? testCount, int? day}) {
+    if (state is AdminMyUsersSelectUser) {
+      emit(AdminMyUsersChangePermission(
+        dialogIsDown: false,
+          testCount:testCount ?? (state as AdminMyUsersChangePermission).testCount,
+          expireDay:
+          day ?? (state as AdminMyUsersChangePermission).expireDay,
+          selectedUser: (state as AdminMyUsersChangePermission).selectedUser,
+          users: state.users));
+    }
+  }
+
+  submitPermission() async{
+    if (state is AdminMyUsersChangePermission) {
+      Map<String,dynamic> data = {
+        "account_id":state.users[(state as AdminMyUsersChangePermission).selectedUser].accountId,
+        "device_id": (await NetworkProvider.getAdminCenters())[Storage
+            .getSelectedDevice()]['device_id'],
+        "test_count": (state as AdminMyUsersChangePermission).testCount,
+        "test_day": (state as AdminMyUsersChangePermission).expireDay
+      };
+      print(await NetworkProvider.submitPermission(data));
+      emit(AdminMyUsersInitial(users: state.users));
+    }
+  }
 }
