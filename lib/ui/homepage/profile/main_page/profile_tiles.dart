@@ -9,7 +9,7 @@ class ProfileTile extends ListTile {
   static getListView(context) {
     return ListView(
       shrinkWrap: true,
-      padding: EdgeInsets.all(10),
+      padding: const EdgeInsets.all(10),
       children: [
         getPersonalInfoTile(context),
         getMessageBoxTile(context),
@@ -31,7 +31,7 @@ class ProfileTile extends ListTile {
           title: Text(
             textDirection: TextDirection.rtl,
             name,
-            style: TextStyle(fontWeight: FontWeight.bold),
+            style: const TextStyle(fontWeight: FontWeight.bold),
           ),
           trailing: Image.asset(
             asset,

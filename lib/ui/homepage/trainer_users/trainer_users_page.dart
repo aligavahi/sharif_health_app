@@ -17,6 +17,7 @@ class TrainerUsersPage extends StatelessWidget {
               return Scaffold(
                 backgroundColor: AppColors.background,
                 appBar: AppBar(
+                  automaticallyImplyLeading: false,
                   title: const Center(
                     child: Text("کاربران من"),
                   ),
@@ -59,7 +60,7 @@ class TrainerUsersPage extends StatelessWidget {
                 child: Icon(Icons.more_vert),
               ),
               title: Text(
-                trainee.firstName,
+                "${trainee.firstName}  ${trainee.lastName}",
                 textAlign: TextAlign.right,
                 style: const TextStyle(fontWeight: FontWeight.bold),
               ),
@@ -67,11 +68,11 @@ class TrainerUsersPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   Text(
-                    trainee.lastName,
+                    trainee.mobileNumber,
                     textAlign: TextAlign.right,
                   ),
                   const Icon(
-                    Icons.lightbulb_circle_rounded,
+                    Icons.phone_android_rounded,
                     size: 15,
                     color: AppColors.orange,
                   )
@@ -85,7 +86,7 @@ class TrainerUsersPage extends StatelessWidget {
                     color: AppColors.lightShadow,
                   ),
                   child: Icon(
-                    Icons.bike_scooter,
+                    Icons.person,
                     color: AppColors.green,
                   )),
             ),

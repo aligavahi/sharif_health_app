@@ -38,6 +38,14 @@ class AdminMyTraineesPage extends StatelessWidget {
           return Scaffold(
             backgroundColor: AppColors.background,
             appBar: AppBar(
+              automaticallyImplyLeading: false,
+              leading: (state is AdminMyUsersInitial
+                  ? null
+                  : InkWell(
+                      child: const Icon(Icons.arrow_back),
+                      onTap: () =>
+                          BlocProvider.of<AdminMyUsersCubit>(context).goBack(),
+                    )),
               title: const Center(
                 child: Text("کاربران من"),
               ),
@@ -67,7 +75,7 @@ class AdminMyTraineesPage extends StatelessWidget {
         height: 80,
         child: Center(
           child: InkWell(
-            borderRadius: BorderRadius.all(Radius.circular(20)),
+            borderRadius: const BorderRadius.all(Radius.circular(20)),
             onTap: () {
               BlocProvider.of<AdminMyUsersCubit>(context).goToDetailUser(index);
             },
@@ -76,7 +84,7 @@ class AdminMyTraineesPage extends StatelessWidget {
                 child: Icon(Icons.more_vert),
               ),
               title: Text(
-                trainee.firstName,
+                "${trainee.firstName}  ${trainee.lastName}",
                 textAlign: TextAlign.right,
                 style: const TextStyle(fontWeight: FontWeight.bold),
               ),
@@ -84,11 +92,11 @@ class AdminMyTraineesPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   Text(
-                    trainee.lastName,
+                    trainee.phoneNumber,
                     textAlign: TextAlign.right,
                   ),
                   const Icon(
-                    Icons.lightbulb_circle_rounded,
+                    Icons.phone_android_rounded,
                     size: 15,
                     color: AppColors.orange,
                   )
@@ -101,8 +109,8 @@ class AdminMyTraineesPage extends StatelessWidget {
                     borderRadius: BorderRadius.all(Radius.circular(10)),
                     color: AppColors.lightShadow,
                   ),
-                  child: Icon(
-                    Icons.bike_scooter,
+                  child: const Icon(
+                    Icons.person,
                     color: AppColors.green,
                   )),
             ),

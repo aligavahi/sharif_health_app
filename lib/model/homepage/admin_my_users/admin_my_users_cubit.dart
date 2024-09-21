@@ -34,25 +34,33 @@ class AdminMyUsersCubit extends Cubit<AdminMyUsersState> {
   editPermissionDialog({int? testCount, int? day}) {
     if (state is AdminMyUsersSelectUser) {
       emit(AdminMyUsersChangePermission(
-        dialogIsDown: false,
-          testCount:testCount ?? (state as AdminMyUsersChangePermission).testCount,
-          expireDay:
-          day ?? (state as AdminMyUsersChangePermission).expireDay,
+          dialogIsDown: false,
+          testCount:
+              testCount ?? (state as AdminMyUsersChangePermission).testCount,
+          expireDay: day ?? (state as AdminMyUsersChangePermission).expireDay,
           selectedUser: (state as AdminMyUsersChangePermission).selectedUser,
           users: state.users));
     }
   }
 
-  submitPermission() async{
+  submitPermission() async {
     if (state is AdminMyUsersChangePermission) {
-      Map<String,dynamic> data = {
-        "account_id":state.users[(state as AdminMyUsersChangePermission).selectedUser].accountId,
-        "device_id": (await NetworkProvider.getAdminCenters())[Storage
-            .getSelectedDevice()]['device_id'],
+      Map<String, dynamic> data = {
+        "account_id": state
+            .users[(state as AdminMyUsersChangePermission).selectedUser]
+            .accountId,
+        "device_id": (await NetworkProvider.getAdminCenters())[
+            Storage.getSelectedDevice()]['device_id'],
         "test_count": (state as AdminMyUsersChangePermission).testCount,
         "test_day": (state as AdminMyUsersChangePermission).expireDay
       };
       print(await NetworkProvider.submitPermission(data));
+      emit(AdminMyUsersInitial(users: state.users));
+    }
+  }
+
+  goBack() {
+    if (state is AdminMyUsersSelectUser) {
       emit(AdminMyUsersInitial(users: state.users));
     }
   }

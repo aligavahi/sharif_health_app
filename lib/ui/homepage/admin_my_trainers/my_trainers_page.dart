@@ -17,6 +17,7 @@ class MyTrainersPage extends StatelessWidget {
               return Scaffold(
                 backgroundColor: AppColors.background,
                 appBar: AppBar(
+                  automaticallyImplyLeading: false,
                   title: const Center(
                     child: Text("مربیان من"),
                   ),
@@ -51,7 +52,7 @@ class MyTrainersPage extends StatelessWidget {
         height: 80,
         child: Center(
           child: InkWell(
-            borderRadius: BorderRadius.all(Radius.circular(20)),
+            borderRadius: const BorderRadius.all(Radius.circular(20)),
             onTap: () {
             },
             child: ListTile(
@@ -59,7 +60,7 @@ class MyTrainersPage extends StatelessWidget {
                 child: Icon(Icons.more_vert),
               ),
               title: Text(
-                trainer.firstName,
+                "${trainer.firstName}  ${trainer.lastName}",
                 textAlign: TextAlign.right,
                 style: const TextStyle(fontWeight: FontWeight.bold),
               ),
@@ -67,11 +68,11 @@ class MyTrainersPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   Text(
-                    trainer.lastName,
+                    trainer.phoneNumber,
                     textAlign: TextAlign.right,
                   ),
                   const Icon(
-                    Icons.lightbulb_circle_rounded,
+                    Icons.phone_android_rounded,
                     size: 15,
                     color: AppColors.orange,
                   )
@@ -84,8 +85,8 @@ class MyTrainersPage extends StatelessWidget {
                     borderRadius: BorderRadius.all(Radius.circular(10)),
                     color: AppColors.lightShadow,
                   ),
-                  child: Icon(
-                    Icons.bike_scooter,
+                  child: const Icon(
+                    Icons.person,
                     color: AppColors.green,
                   )),
             ),

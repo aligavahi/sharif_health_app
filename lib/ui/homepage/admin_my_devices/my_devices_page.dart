@@ -16,6 +16,7 @@ class MyDevicesPage extends StatelessWidget {
               return Scaffold(
                 backgroundColor: AppColors.background,
                 appBar: AppBar(
+                  automaticallyImplyLeading: false,
                   title: const Center(
                     child: Text("دستگاه های من"),
                   ),
