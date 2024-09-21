@@ -69,9 +69,8 @@ class ProfileTile extends ListTile {
   }
 
   static getShareTile(context) {
-    return getTile(context, "assets/profile/share.png", "ویرایش اطلاعات شخصی",
+    return getTile(context, "assets/profile/share.png", "دعوت از دوستان",
         () {
-      BlocProvider.of<ProfileCubit>(context).onProfileEdit();
     });
   }
 }

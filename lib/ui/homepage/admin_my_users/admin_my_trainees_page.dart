@@ -26,10 +26,6 @@ class AdminMyTraineesPage extends StatelessWidget {
                           builder: (context, state) {
                         if (state is AdminMyUsersChangePermission) {
                           return AdminUserPermission(
-                            expireDay: (state as AdminMyUsersChangePermission)
-                                .expireDay,
-                            testCount: (state as AdminMyUsersChangePermission)
-                                .testCount,
                             cubit: cubit,
                           );
                         }

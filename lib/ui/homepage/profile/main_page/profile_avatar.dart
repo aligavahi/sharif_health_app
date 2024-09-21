@@ -17,8 +17,8 @@ class ProfileAvatar extends StatelessWidget {
         right: 0,
         child: ElevatedButton(
             style: ButtonStyle(
-                shape: WidgetStateProperty.all(CircleBorder()),
-                padding: WidgetStateProperty.all(EdgeInsets.all(20)),
+                shape: WidgetStateProperty.all(const CircleBorder()),
+                padding: WidgetStateProperty.all(const EdgeInsets.all(20)),
                 backgroundColor: WidgetStateProperty.all(AppColors.green)),
             onPressed: () {},
             child: const Icon(

@@ -39,15 +39,17 @@ class TestUnit extends StatelessWidget {
                         flex: 5,
                         child: Column(children: [
                           Expanded(
+                              flex: 2,
                               child: ListTile(
-                            title: Text(
-                                testNumberPlaceHolder.replaceAll(
-                                    "{}", (index + 1).toString()),
-                                style: const TextStyle(
-                                    fontWeight: FontWeight.bold),
-                                textDirection: TextDirection.rtl),
-                          )),
+                                title: Text(
+                                    testNumberPlaceHolder.replaceAll(
+                                        "{}", (index + 1).toString()),
+                                    style: const TextStyle(
+                                        fontWeight: FontWeight.bold),
+                                    textDirection: TextDirection.rtl),
+                              )),
                           Expanded(
+                              flex: 2,
                               child: ListTile(
                                   trailing: const Icon(
                                     Icons.calendar_month_outlined,
@@ -59,12 +61,14 @@ class TestUnit extends StatelessWidget {
                                     style: const TextStyle(fontSize: 12),
                                   ))),
                           Expanded(
+                              flex: 2,
                               child: ListTile(
                                   trailing: const Icon(Icons.location_pin,
                                       color: AppColors.orange),
                                   title: Text(test.center,
                                       textDirection: TextDirection.rtl,
                                       style: const TextStyle(fontSize: 12)))),
+                          Spacer()
                         ])),
                     Padding(
                         padding: const EdgeInsets.only(right: 20),
