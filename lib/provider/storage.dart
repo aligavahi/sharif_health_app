@@ -49,7 +49,7 @@ class Storage {
 
   static loadToken() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    if (runEnvironment == RunEnvironment.dev) {
+    if (runEnvironment == RunEnvironment.prod) {
       model.token = '541ef2efe06c902b449a3d5392c98ae0';
     } else {
       model.token = prefs.getString(_tokenKey) ?? '';
