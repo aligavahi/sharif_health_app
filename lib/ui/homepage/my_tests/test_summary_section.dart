@@ -23,7 +23,7 @@ class _TestSummarySectionState extends State<TestSummarySection>
 
   @override
   void initState() {
-    tabController = TabController(length: 3, vsync: this);
+    tabController = TabController(length: 3, vsync: this,initialIndex: 1);
     super.initState();
   }
 

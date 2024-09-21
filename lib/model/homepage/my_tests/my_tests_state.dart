@@ -337,6 +337,14 @@ class DeviceData {
             physique_rating: data[index]['physique_rating'],
             center: data[index]['center'])));
   }
+
+  Map rangeDict(String key) {
+    Map data = {
+      'lower_$key':getAttribute('lower_$key'),
+      'upper_$key':getAttribute('upper_$key')
+    };
+    return data;
+  }
 }
 
 @immutable

@@ -7,24 +7,29 @@ import 'package:syncfusion_flutter_charts/charts.dart';
 class HistorySection extends StatelessWidget {
   final String name;
   final List<Map> data;
+  final Map lastTest;
 
-  const HistorySection({super.key, required this.name, required this.data});
+  const HistorySection(
+      {super.key,
+      required this.name,
+      required this.data,
+      required this.lastTest});
 
   @override
   Widget build(BuildContext context) {
     final Map<String, String> ranges = {
       "weight":
-          "بازه مجاز شما از ${data[0]['lower_weight']} تا ${data[0]['upper_weight']} کیلوگرم",
+          "بازه مجاز شما از ${lastTest['lower_weight']} تا ${lastTest['upper_weight']} کیلوگرم",
       "bmi":
-          "بازه مجاز شما از ${data[0]['lower_bmi']} تا ${data[0]['upper_bmi']}",
+          "بازه مجاز شما از ${lastTest['lower_bmi']} تا ${lastTest['upper_bmi']}",
       "fat_percentage":
-          "بازه مجاز شما از ${data[0]['lower_fat_p']} تا ${data[0]['upper_fat_p']} درصد",
+          "بازه مجاز شما از ${lastTest['lower_fat_p']} تا ${lastTest['upper_fat_p']} درصد",
       "fat_mass":
-          "بازه مجاز شما از ${data[0]['lower_fat_m']} تا ${data[0]['upper_fat_m']} کیلوگرم",
+          "بازه مجاز شما از ${lastTest['lower_fat_m']} تا ${lastTest['upper_fat_m']} کیلوگرم",
       "ffm":
-          "بازه مجاز شما از ${data[0]['lower_ffm']} تا ${data[0]['upper_ffm']} کیلوگرم",
+          "بازه مجاز شما از ${lastTest['lower_ffm']} تا ${lastTest['upper_ffm']} کیلوگرم",
       "muscle_mass":
-          "بازه مجاز شما از ${data[0]['lower_muscle_m']} تا ${data[0]['upper_muscle_m']} کیلوگرم",
+          "بازه مجاز شما از ${lastTest['lower_muscle_m']} تا ${lastTest['upper_muscle_m']} کیلوگرم",
       "visceral_fat_rating": "بازه مجاز: کمتر از 13",
     };
 
@@ -130,7 +135,7 @@ class HistorySection extends StatelessWidget {
         color: AppColors.white,
       ),
       width: MediaQuery.of(context).size.width * .6,
-      height: 140,
+      height: 70,
       child: Column(
         children: [
           Container(
@@ -142,8 +147,8 @@ class HistorySection extends StatelessWidget {
               color: AppColors.orange,
             ),
             width: MediaQuery.of(context).size.width * .3,
-            child: Center(
-              child: const Text(
+            child: const Center(
+              child: Text(
                 "بازه و محدوده شما",
                 style: TextStyle(
                     color: AppColors.white, fontWeight: FontWeight.bold),
@@ -152,7 +157,7 @@ class HistorySection extends StatelessWidget {
             ),
           ),
           Expanded(
-              child: Container(
+              child: Center(
             child: Text(
               ranges[name] ?? "",
               textAlign: TextAlign.center,
@@ -172,9 +177,9 @@ class HistorySection extends StatelessWidget {
                   bottomRight: Radius.circular(30)),
               color: AppColors.green,
             ),
-            margin: const EdgeInsets.only(bottom: 80),
-            padding: const EdgeInsets.only(bottom: 80),
-            height: MediaQuery.of(context).size.height * .5,
+            margin: const EdgeInsets.only(bottom: 40),
+            padding: const EdgeInsets.only(bottom: 40),
+            height: MediaQuery.of(context).size.height * .45,
             child: chartWidget),
         Positioned(
           bottom: 0,
@@ -208,10 +213,13 @@ class HistorySection extends StatelessWidget {
           children: [
             stackWidget,
             Padding(padding: const EdgeInsets.all(20), child: titleText),
-            Padding(
-                padding: const EdgeInsets.only(left: 10, right: 10),
-                child: detailText)
-          ],
+            Expanded(child: Padding(
+                padding: const EdgeInsets.only(left: 10, right: 10,bottom: 40),
+                child: SingleChildScrollView(
+                    scrollDirection: Axis.vertical,
+                    child: detailText
+                )))
+          ]
         ));
   }
 }

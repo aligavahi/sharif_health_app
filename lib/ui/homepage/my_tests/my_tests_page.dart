@@ -49,7 +49,7 @@ class MyTestsPage extends StatelessWidget {
                     child: inner,
                   ));
             } else if (state is MyTestsSeeHistory) {
-              return getHistorySection(state.name, state.getHistoryData());
+              return getHistorySection(state.name, state.getHistoryData(),state.tests.last.rangeDict(state.name));
             } else if (state is MyTestsSeeDetail) {
               return getDetailSection(state.tests[state.dataIndex], context);
             }
@@ -104,7 +104,7 @@ class MyTestsPage extends StatelessWidget {
     return TestSummarySection(data: test);
   }
 
-  Widget getHistorySection(String name, List<Map> historyData) {
-    return HistorySection(name: name, data: historyData);
+  Widget getHistorySection(String name, List<Map> historyData,Map lastTest) {
+    return HistorySection(name: name, data: historyData,lastTest: lastTest,);
   }
 }

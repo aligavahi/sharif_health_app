@@ -7,23 +7,20 @@ class User {
   final int testCount;
   final int approvedTestCount;
   final Trainer trainer;
-
   final int accountId;
 
   User(this.accountId, this.firstName, this.lastName, this.phoneNumber,
       this.testCount, this.approvedTestCount, this.trainer);
 
   static List<User> fromList(List<Map> listMap) {
-    print(listMap);
-
     return listMap
         .map((item) => User(
-            item['account_id'],
-            item['first_name'],
-            item['last_name'],
-            item['mobile_number'],
-            item['test_count'],
-            item['approved_test_count'],
+            item['account_id']??"",
+            item['first_name']??"",
+            item['last_name']??"",
+            item['mobile_number']??"",
+            item['test_count']??0,
+            item['approved_test_count']??0,
             Trainer.fromJson(item['trainer'])))
         .toList();
   }
