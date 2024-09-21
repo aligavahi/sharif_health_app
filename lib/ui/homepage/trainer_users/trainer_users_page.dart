@@ -85,7 +85,7 @@ class TrainerUsersPage extends StatelessWidget {
                     borderRadius: BorderRadius.all(Radius.circular(10)),
                     color: AppColors.lightShadow,
                   ),
-                  child: Icon(
+                  child: const Icon(
                     Icons.person,
                     color: AppColors.green,
                   )),

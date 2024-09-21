@@ -54,7 +54,7 @@ class AdminMyUsersCubit extends Cubit<AdminMyUsersState> {
         "test_count": (state as AdminMyUsersChangePermission).testCount,
         "test_day": (state as AdminMyUsersChangePermission).expireDay
       };
-      print(await NetworkProvider.submitPermission(data));
+      await NetworkProvider.submitPermission(data);
       emit(AdminMyUsersInitial(users: state.users));
     }
   }

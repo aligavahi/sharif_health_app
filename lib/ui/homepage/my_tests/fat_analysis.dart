@@ -16,6 +16,7 @@ class FatAnalysis extends StatelessWidget {
         'unit': 'کیلوگرم',
         'icon': 'icon_ffm.png',
         'value': data.ffm,
+        'id':'ffm',
         'percentage': ''
       },
       {
@@ -23,6 +24,7 @@ class FatAnalysis extends StatelessWidget {
         'unit': 'کیلوگرم',
         'icon': 'icon_fat_mass.png',
         'value': data.fat_mass,
+        'id':'fat_mass',
         'percentage': ''
       },
       {
@@ -37,6 +39,7 @@ class FatAnalysis extends StatelessWidget {
         'unit': 'کیلوگرم',
         'icon': 'icon_fat_top.png',
         'value': data.fat_trunk_m,
+        'id':'fat_trunk_m',
         'percentage': data.fat_trunk_p
       },
     ];
@@ -46,6 +49,7 @@ class FatAnalysis extends StatelessWidget {
         'unit': 'کیلوگرم',
         'image': 'image_muscle_left_arm.png',
         'value': data.fat_left_arm_m,
+        'id':'fat_left_arm_m',
         'percentage': data.fat_left_arm_p
       },
       {
@@ -53,12 +57,14 @@ class FatAnalysis extends StatelessWidget {
         'unit': 'کیلوگرم',
         'image': 'image_muscle_right_arm.png',
         'value': data.fat_right_arm_m,
+        'id':'fat_right_arm_m',
         'percentage': data.fat_right_arm_p
       },
       {
         'name': 'چربی پا چپ',
         'unit': 'کیلوگرم',
         'image': 'image_muscle_left_leg.png',
+        'id':'fat_left_leg_m',
         'value': data.fat_left_leg_m,
         'percentage': data.fat_left_leg_p
       },
@@ -67,10 +73,11 @@ class FatAnalysis extends StatelessWidget {
         'unit': 'کیلوگرم',
         'image': 'image_muscle_right_leg.png',
         'value': data.fat_right_leg_m,
+        'id':'fat_right_leg_m',
         'percentage': data.fat_right_leg_p
       }
     ];
-    final width = 250; // (MediaQuery.of(context).size.width - 30) / 2;
+    const width = 250; // (MediaQuery.of(context).size.width - 30) / 2;
     Widget finalListCard;
     Widget finalListContainer;
     List<Widget> typeCardItems = List<Widget>.generate(

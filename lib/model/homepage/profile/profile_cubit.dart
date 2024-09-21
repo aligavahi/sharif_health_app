@@ -9,17 +9,16 @@ part 'profile_state.dart';
 
 class ProfileCubit extends Cubit<ProfileState> {
   ProfileCubit() : super(ProfileInitial({})) {
-    Future.microtask(() async =>
-        emit(ProfileInitial(await NetworkProvider.getProfileData())));
+    updateDate();
   }
 
   onLogout() {
-    emit(ProfileLogout(state.profileData,confirmed: false));
+    emit(ProfileLogout(state.profileData, confirmed: false));
   }
 
   confirmLogout() async {
     await Storage.clear();
-    emit(ProfileLogout(state.profileData,confirmed: true));
+    emit(ProfileLogout(state.profileData, confirmed: true));
   }
 
   void backToProfile() async {
@@ -54,5 +53,11 @@ class ProfileCubit extends Cubit<ProfileState> {
     } else {
       debugPrint("nok");
     }
+    updateDate();
+  }
+
+  void updateDate() {
+    Future.microtask(() async =>
+        emit(ProfileInitial(await NetworkProvider.getProfileData())));
   }
 }
