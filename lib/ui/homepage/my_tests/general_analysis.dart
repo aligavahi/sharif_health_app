@@ -1,8 +1,5 @@
-import 'dart:ui';
-
-import 'package:flutter/cupertino.dart';
+import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sharif_health_app/model/homepage/my_tests/my_tests_cubit.dart';
 import 'package:sharif_health_app/utils/app_colors.dart';
@@ -69,22 +66,23 @@ class GeneralAnalysis extends StatelessWidget {
         'id': 'bmr'
       },
     ];
-    final width = (MediaQuery.of(context).size.width - 30) / 2;
+    final width = (MediaQuery.of(context).size.width - 5) / 2;
+    final height= max(width/2.5, 120.0);
     List<Widget> final_list = [];
     List<Widget> typ1_items = List<Widget>.generate(typ1Analysis.length,
         (index) => get_general_typ1_item(context, typ1Analysis[index]));
     List<Widget> typ2_items = List<Widget>.generate(typ2Analysis.length,
         (index) => get_general_typ2_item(context, typ2Analysis[index]));
     final_list.add(SizedBox(
-      height: (width + 5) * .33 * 1 + 20,
+      height: height+10,
       child: GridView.count(
-        childAspectRatio: 3,
+        childAspectRatio: width/height,
         controller: new ScrollController(keepScrollOffset: false),
         shrinkWrap: true,
         scrollDirection: Axis.vertical,
-        padding: EdgeInsets.all(20),
-        crossAxisSpacing: 8,
-        mainAxisSpacing: 8,
+        padding: const EdgeInsets.all(5),
+        crossAxisSpacing: 4,
+        mainAxisSpacing: 4,
         crossAxisCount: 2,
         children: typ1_items,
       ),
@@ -92,14 +90,14 @@ class GeneralAnalysis extends StatelessWidget {
     final_list.add(SizedBox(
       height: (width + 2) * 1 * 2 + 2 * 20,
       child: GridView.count(
-        padding: EdgeInsets.all(20),
+        padding: const EdgeInsets.all(5),
         childAspectRatio: 1,
         controller: new ScrollController(keepScrollOffset: false),
         shrinkWrap: true,
         scrollDirection: Axis.vertical,
         crossAxisCount: 2,
-        crossAxisSpacing: 8,
-        mainAxisSpacing: 8,
+        crossAxisSpacing: 4,
+        mainAxisSpacing: 4,
         children: typ2_items,
       ),
     ));
@@ -136,7 +134,8 @@ class GeneralAnalysis extends StatelessWidget {
                 ),
                 child: CircleAvatar(
                     backgroundColor: AppColors.background,
-                    radius: 30,
+                    minRadius: 10,
+                    maxRadius: 20,
                     child: Padding(
                         padding: EdgeInsets.all(5),
                         child: Image.asset("assets/mytests/${item['icon']}"))),
@@ -148,7 +147,7 @@ class GeneralAnalysis extends StatelessWidget {
 
   Widget get_general_typ2_item(context, Map<String, dynamic> item) {
     return Container(
-        padding: EdgeInsets.only(top: 30),
+        padding: EdgeInsets.zero,
         margin: EdgeInsets.zero,
         decoration: BoxDecoration(
             image: DecorationImage(
@@ -162,17 +161,17 @@ class GeneralAnalysis extends StatelessWidget {
                 "${item['value']} ${item['unit']}",
                 textDirection: TextDirection.rtl,
                 textAlign: TextAlign.right,
-                style: TextStyle(fontSize: 16),
+                style: TextStyle(fontSize: 12),
               ),
               title: Text(
                 item['name'],
                 textAlign: TextAlign.right,
-                style: TextStyle(fontSize: 18),
+                style: TextStyle(fontSize: 14),
               ),
               trailing: Container(
-                  width: 60,
-                  height: 60,
-                  margin: const EdgeInsets.only(right: 10),
+                  width: 40,
+                  height: 40,
+                  margin: const EdgeInsets.only(right: 3,top: 3),
                   decoration: const BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(10)),
                     color: Color.fromRGBO(250, 250, 250, .3),

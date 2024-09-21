@@ -25,6 +25,7 @@ class TestUnit extends StatelessWidget {
                 child: Container(
                   decoration: const BoxDecoration(
                     image: DecorationImage(
+                      opacity: .5,
                         image: AssetImage(
                           "assets/mytests/test_image.png",
                         ),
@@ -33,7 +34,7 @@ class TestUnit extends StatelessWidget {
                   ),
                   child: Row(children: [
                     const Spacer(
-                      flex: 5,
+                      flex: 2,
                     ),
                     Expanded(
                         flex: 5,

@@ -59,7 +59,7 @@ class _TestSummarySectionState extends State<TestSummarySection>
             indicatorWeight: 3.0,
             tabs: ['آنالیز عضلات', 'آنالیز کلی', 'آنالیز چربی'].map((e) {
               return SizedBox(
-                width: MediaQuery.of(context).size.width / 4,
+                width: MediaQuery.of(context).size.width / 5,
                 child: Tab(text: e),
               );
             }).toList(),
